@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <main>
+        <h1>The HTML Document Tree</h1>
+
+        <p>Each HTML document can actually be referred to as a document tree. We describe the elements in the tree like
+            we
+            would describe a family tree. There are ancestors, descendants, parents, children and siblings.</p>
+
+        <p>It is important to understand the document tree because CSS selectors use the document tree.</p>
+
+        <p>Use the sample HTML document below for these examples. The &lt;head&gt; section of the document is omitted
+            for brevity.
+        </p>
+
+        <img src="images/htmldom/sample_html.png" alt="sample_html">
+
+        <p>A diagram of the above HTML document tree would look like this.</p>
+        <img src="images/htmldom/dom_tree.gif" alt="dom_tree">
+
+
+
+        <h2 id="ancestor">Ancestor</h2>
+        <p>An ancestor refers to any element that is connected but further up the document tree - no matter how many
+            levels higher.</p>
+        <p>In the diagram below, the &lt;body> element is the ancestor of all other elements on the page.</p>
+
+        <p><img src="images/htmldom/dom_tree_ancestor.gif" alt="alt" /></p>
+
+
+        <h2 id="descendant">Descendant</h2>
+        A descendant refers to any element that is connected but lower down the document tree - no matter how many
+        levels lower.</p>
+        <p>In the diagram below, all elements that are connected below the &lt;div&gt; element are descendants of that
+            &lt;div&gt;.
+
+        <p><img src="images/htmldom/dom_tree_descendant.gif" alt="alt" /></p>
+
+
+        <h2 id="parent_and_child">Parent and Child</h2>
+        <p>A parent is an element that is directly above and connected to an element in the document tree. In the
+            diagram below, the &lt;div&gt; is a parent to the &lt;ul&gt;.</p>
+
+        <p>A child is an element that is directly below and connected to an element in the document tree. In the diagram
+            above, the &lt;ul&gt; is a child to the &lt;div&gt;.</p>
+
+        <p><img src="images/htmldom/dom_tree_parent.gif" alt="alt" /></p>
+
+
+
+        <h2 id="sibling">Sibling</h2>
+        <p>A sibling is an element that shares the same parent with another element. </p>
+        <p>In the diagram below, the &lt;li&gt;&#x27;s are siblings as they all share the same parent - the &lt;ul&gt;.
+        </p>
+
+        <p><img src="images/htmldom/dom_tree_siblings.gif" alt="alt" /></p>
+
+    </main>
+</body>
+
+</html>
