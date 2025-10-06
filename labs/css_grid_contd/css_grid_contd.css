@@ -77,3 +77,13 @@ h3 {
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
+.text{
+    max-width: 800px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+li{
+  padding-top:10px;
+}
