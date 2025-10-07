@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css_grid_contd.css">
+</head>
+
+<body>
+    <main>
+
+        <article>
+            <header>
+                <h1>Lab 4: CSS Responsive Grid - Test Your Knowledge</h1>
+                <h2>CSS Grid Layout Realworld Example</h2>
+            </header>
+            <p>This lab tests your knowledge of lab 3 where we created a responsive image gallery. </p>
+            <p>Will we revise how to:</p>
+
+            <ul>
+                <li>Create a responsive website layout using CSS Grid.</li>
+                <li>Use media queries to adjust layouts for different screen sizes.</li>
+                <li>Work with percentages for flexible, proportional columns.</li>
+                <li>Design a simple single-column mobile view and a two-column desktop view.</li>
+            </ul>
+        </article>
+
+        <article>
+
+            <h3>Auto vs Percentages in CSS Grid</h3>
+
+            <p>
+                In the previous lab, we used the <span class="highlight">auto</span> keyword
+                (and combinations like <span class="highlight">auto auto auto</span>)
+                to size grid columns. The <span class="highlight">auto</span> setting tells the browser:
+                <em>“Make this column as wide as its content needs, but no more.”</em>
+                This approach is quick, flexible, and content-driven.
+            </p>
+            <p>
+                Now, in this lab, we’ll move to <strong>percentages</strong>
+                (e.g., <span class="highlight">20% 70%</span>).
+                This method sizes columns relative to the available space in the grid container,
+                no matter what content goes inside.
+            </p>
+
+            <h3>Pros and Cons</h3>
+
+            <h4>Using <span class="highlight">auto</span></h4>
+            <ul>
+                <li><strong>Pros:</strong> Easy to use, adapts naturally to content. Great for layouts where
+                    you don’t know or don’t want to specify exact proportions.</li>
+                <li><strong>Cons:</strong> Columns can become uneven if content sizes vary greatly. Less
+                    control over consistent proportions across screen widths.</li>
+            </ul>
+
+            <h4>Using Percentages</h4>
+            <ul>
+                <li><strong>Pros:</strong> Precise control over layout proportions. Scales smoothly with
+                    viewport changes, perfect for responsive design.</li>
+                <li><strong>Cons:</strong> Requires careful planning so percentages add up correctly. Can feel
+                    rigid if content overflows the allocated space.</li>
+            </ul>
+            <article>
+                <h3>Best Practices with Percentages</h3>
+                <ul>
+                    <li><strong>Don’t always use 100%.</strong> A 100% grid item will take the full row, leaving no
+                        space for padding or gaps. Instead, try proportions like <span class="highlight">20%
+                            70%</span> and let the remaining space handle gaps.</li>
+                    <li><strong>Leave room for gaps.</strong> Factor in <span class="highlight">gap</span> or <span
+                            class="highlight">padding</span> when calculating percentages.</li>
+                    <li><strong>Mix with <span class="highlight">fr</span> units.</strong> For flexibility, you can
+                        combine percentages and fractions (e.g., <span class="highlight">20% 1fr</span>).</li>
+                    <li><strong>Test at multiple breakpoints.</strong> A layout that looks perfect at 1200px may be
+                        cramped at 600px. Adjust percentages inside media queries as needed.</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Summary</h3>
+                <p>
+                    Use <span class="highlight">auto</span> when you want the layout to
+                    “shrink-wrap” around content.
+                    Use <strong>percentages</strong> when you want relative proportions
+                    that scale consistently across the container.
+                </p>
+                </div>
+
+            </article>
+
+            <article>
+
+                <h2>Tasks:</h2>
+                <ol>
+                    <li>Create the below layout using CSS Grid and media queries.</li>
+
+                    <li>Use percentages for the column widths.</li>
+                </ol>
+            </article>
+
+            <section class="grid-container" id="car-gallery">
+
+                <article>
+                    <h3>Mobile Viewport</h3>
+                    <img src="images/mobile_viewport2.png" alt="CSS Grid in mobile viewport">
+                </article>
+
+                <article>
+                    <h3>Tablet Viewport</h3>
+                    <img src="images/tablet_viewport2.png" alt="CSS Grid with 2 columns across">
+                </article>
+
+
+            </section>
+
+            <article>
+                <h2>Requirements</h2>
+                <p>Use CSS Grid to create a responsive layout that adjusts based on the viewport size.</p>
+                <p>
+                    For mobile (default) → the layout is 1 column.</p>
+
+                <p>For screens larger than 599px → we want two columns:</p>
+                <ul>
+                    <li>First column = 20% (sidebar)</li>
+
+                    <li>Second column = 70% (main content)</li>
+
+                    <li>The remaining 10% is used for gaps and padding between the two columns (not for a third column).
+                    </li>
+                </ul>
+
+                <p>Use media queries to change the layout at the 600px breakpoint.</p>
+
+                <p>Reminder: A 'viewport' is the user's visible area of a web page, which is determined by the size of
+                    the
+                    browser
+                    window.
+                </p>
+            </article>
+
+            <article>
+                <h3>Tips</h3>
+
+                <p>Everything you need to know is in our previous labwork on Responsive CSS Grid Layouts. </p>
+                <p>Remember to test your layouts at each breakpoint to ensure they are working as expected.</p>
+                <p>Notice how it is hard to get the text box and the image to align where they are the same height? One solution is to use the CSS Flexbox, which we will look at in your next lab.</p>
+            </article>
+
+        </article>
+
+    </main>
+
+
+</body>
+
+</html>

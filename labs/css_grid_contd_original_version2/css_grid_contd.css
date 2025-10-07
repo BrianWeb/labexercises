@@ -1,0 +1,104 @@
+body {
+    margin: 0px;
+    font-family: AvenirNextCyr-Regular, NunitoSans, FoundersGroteskRegular, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.5em;
+    background-color: rgb(250, 250, 250);
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0px;
+    color: rgb(34, 34, 34);
+    font-size: 1.1em;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 50px;
+    align-items: stretch;
+
+}
+
+@media only screen and (min-width: 600px) {
+    #car-gallery {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    #car-gallery {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+}
+
+
+main {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+ul{
+    list-style-type: square
+}
+
+h1 {
+    font-size: 2.4em;
+    font-family: AvenirNextCyr-Regular, NunitoSans, FoundersGroteskRegular, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+    color: #103062;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+       margin-bottom: 15px;
+}
+
+h2 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    color: #006898e0;
+    font-size: 1.8em;
+    font-family: AvenirNextCyr-Regular, NunitoSans, FoundersGroteskRegular, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+h3 {
+    font-size: 1.6em;
+    font-family: AvenirNextCyr-Regular, NunitoSans, FoundersGroteskRegular, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+    color: #ff5500;
+    margin-left: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+h4{
+    color: #ff8400;
+     font-size: 1.4em;
+}
+header{
+    padding-bottom: 30px;
+}
+article{
+    padding-top:20px;
+}
+
+.text{
+    max-width: 800px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+li{
+  padding-top:10px;
+}
