@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PC vs Mobile Security Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f8f9fa;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 14px;
+      border: 1px solid #ddd;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #003a51;
+      color: #ffffff;
+    }
+    tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+    .pc {
+      color: #daecff;
+      font-weight: bold;
+    }
+    .mobile {
+      color: #e2ffe9;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>PC vs Mobile Security Threats</h1>
+  <table>
+    <tr>
+      <th>Aspect</th>
+      <th><span class="pc">PC Software</span></th>
+      <th><span class="mobile">Mobile Apps</span></th>
+    </tr>
+    <tr>
+      <td>Distribution</td>
+      <td>Often installed from websites, USBs, or disks (uncontrolled sources).</td>
+      <td>Primarily from app stores with vetting; sideloading possible.</td>
+    </tr>
+    <tr>
+      <td>Sandboxing</td>
+      <td>Traditionally weak; many programs have system-wide access.</td>
+      <td>Strong sandboxing & permissions model by default.</td>
+    </tr>
+    <tr>
+      <td>Update Practices</td>
+      <td>Patch management inconsistent; user must install updates manually or via IT.</td>
+      <td>Automatic updates via app stores (though fragmentation affects Android OS).</td>
+    </tr>
+    <tr>
+      <td>Malware Risk</td>
+      <td>High — many decades of malware targeting PCs.</td>
+      <td>Growing — malware hidden in apps, especially outside official stores.</td>
+    </tr>
+    <tr>
+      <td>User Behavior</td>
+      <td>Users more cautious with unknown downloads.</td>
+      <td>Users often grant permissions quickly, download casual apps.</td>
+    </tr>
+    <tr>
+      <td>Security Tools</td>
+      <td>Antivirus, firewalls, IDS/IPS widely deployed.</td>
+      <td>Limited security tools; OS security built-in but fewer third-party defenses.</td>
+    </tr>
+    <tr>
+      <td>Unique Threats</td>
+      <td>Ransomware, rootkits, phishing emails.</td>
+      <td>SIM swaps, malicious QR codes, sensor misuse, insecure Wi-Fi.</td>
+    </tr>
+  </table>
+</body>
+</html>
