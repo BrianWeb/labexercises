@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS Grid Column Reference</title>
+    <link rel="stylesheet" href="CSS_Grid_and_Flexbox_test_preparation.css">
+
+</head>
+
+<body>
+    <h1>CSS Grid Column Sizing Cheat Sheet</h1>
+    <table>
+        <tr>
+            <th>Unit / Keyword</th>
+            <th>Meaning</th>
+            <th>When to Use</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>auto</code></td>
+            <td>Column width adjusts to fit the content (shrink-to-fit), but can expand if extra space exists.</td>
+            <td>Use for sidebars, logos, or labels where width should depend on content length.</td>
+            <td><code>grid-template-columns: auto 1fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>fr</code></td>
+            <td>Fractional unit: distributes remaining free space proportionally.</td>
+            <td>Flexible layouts where columns should grow/shrink together.</td>
+            <td><code>grid-template-columns: 1fr 2fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>%</code></td>
+            <td>Percentage of the container width.</td>
+            <td>Exact proportional splits tied to container width.</td>
+            <td><code>grid-template-columns: 30% 70%;</code></td>
+        </tr>
+        <tr>
+            <td><code>auto</code></td>
+            <td>Column adjusts to fit its content (but can grow if space allows).</td>
+            <td>For “shrink-to-fit” elements like logos or labels.</td>
+            <td><code>grid-template-columns: auto 1fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>px / em / rem</code></td>
+            <td>Fixed, absolute size columns.</td>
+            <td>Precise control (e.g., sidebar exactly 200px).</td>
+            <td><code>grid-template-columns: 200px 1fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>minmax(min, max)</code></td>
+            <td>Track size stays between min and max values.</td>
+            <td>Responsive columns that grow/shrink within limits.</td>
+            <td><code>grid-template-columns: minmax(150px, 1fr) 2fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>fit-content()</code></td>
+            <td>Content-based, but capped at a max width.</td>
+            <td>When content should shrink-wrap, but not exceed a limit.</td>
+            <td><code>grid-template-columns: fit-content(300px) 1fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>max-content</code></td>
+            <td>Column as wide as its longest content item.</td>
+            <td>Rare, use for content-driven widths.</td>
+            <td><code>grid-template-columns: max-content 1fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>min-content</code></td>
+            <td>Column shrinks to the narrowest size without overflow.</td>
+            <td>Advanced layouts where content should be as small as possible.</td>
+            <td><code>grid-template-columns: min-content 1fr;</code></td>
+        </tr>
+        <tr>
+            <td><code>repeat()</code></td>
+            <td>Shorthand to repeat column patterns.</td>
+            <td>Quickly define multiple similar columns.</td>
+            <td><code>grid-template-columns: repeat(3, 1fr);</code></td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sidebar Sizing Lab</title>
+  <link rel="stylesheet" href="CSS_grid_dimensions_examples.css">
+</head>
+
+<body>
+  <h1>Sidebar Sizing Experiment</h1>
+  <p>Resize the browser window to see how each layout behaves.</p>
+
+  
+  <section class="example auto">
+    <h2>1. Auto</h2>
+    <div class="grid">
+      <aside class="sidebar">Sidebar With A LongerLabel</aside>
+      <main class="main">Main content area. Notice that the sidebar only takes as much space as it needs, and the rest goes to the main content.</main>
+    </div>
+  </section>
+
+  <section class="example fixed">
+    <h2>2. Fixed Width (200px)</h2>
+    <div class="grid">
+      <aside class="sidebar">Sidebar</aside>
+      <main class="main">Main content area with flexible text that should adjust to screen size. Try resizing the window!</main>
+    </div>
+  </section>
+
+  <section class="example percent">
+    <h2>3. Percentage (20%)</h2>
+    <div class="grid">
+      <aside class="sidebar">Sidebar</aside>
+      <main class="main">Main content area with flexible text. Notice how the sidebar grows/shrinks proportionally.</main>
+    </div>
+  </section>
+
+  <section class="example fr">
+    <h2>4. Fractional Unit (1fr 3fr)</h2>
+    <div class="grid">
+      <aside class="sidebar">Sidebar</aside>
+      <main class="main">Main content area. Sidebar gets 1 part, main gets 3 parts of free space.</main>
+    </div>
+  </section>
+
+  <section class="example minmax">
+    <h2>5. Minmax(150px, 200px)</h2>
+    <div class="grid">
+      <aside class="sidebar">Sidebar</aside>
+      <main class="main">Main content area. Sidebar never smaller than 150px, never larger than 200px.</main>
+    </div>
+  </section>
+</body>
+
+</html>

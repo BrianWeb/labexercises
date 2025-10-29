@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css_grid_contd.css">
+    <link rel="stylesheet" href="css_grid_with_flexbox.css">
 </head>
 
 <body>
@@ -55,17 +55,12 @@
                 from any source.</p>
 
             <ol>
-                <li>For the mobile viewport, create a single column layout with each car image and <b>text to the
-                        righthand side</b>
-                    taking up the full width of
-                    the viewport.</li>
+                <li>For the mobile viewport, create a single column layout with each car image and <b>text to the righthand side</b>
+                    taking up the full width of the viewport. Create this using a Flexbox.</li>
                 <li>For the tablet viewport, create a two column layout with each car image and <b>text underneath</b>
-                    taking
-                    up 50% of the width of
-                    the viewport.</li>
-                <li>For the desktop/laptop viewport, create a three column layout with each car image and <b>text
-                        underneath</b> taking up 33.33%
-                    of the width of the viewport.</li>
+                    taking up 50% of the width of the viewport. Create this using a CSS Grid. Inside the first grid item, place the Flexbox container created in task 1. </li>
+                <li>For the desktop/laptop viewport, create a three column layout with each car image and <b>text underneath</b>
+                    taking up 33.33% of the width of the viewport.</li>
                 <li>Add some spacing between the images using grid-gap or padding/margin.</li>
                 <li>Use the following breakpoints for your media queries:</li>
                 <ul>
@@ -74,8 +69,7 @@
                     <li>Desktop: 900px and above</li>
 
                 </ul>
-                <p>Recap: A 'breakpoint' is a specific point in the CSS where the layout changes based on the viewport
-                    size. See notes on responsive design for more information.</p>
+                <p>Recap: A 'breakpoint' is a specific point in the CSS where the layout changes based on the viewport size. See notes on responsive design for more information.</p>
 
                 <li>Include at least 6 car images with accompanying text (car name and price) below each image.</li>
                 <li>Add a title above the gallery that says "Classic and Sports Car Gallery".</li>
@@ -85,11 +79,26 @@
 
             <h3>Tips</h3>
 
-                <p>Everything you need to know is in our previous labwork on Responsive CSS Grid Layouts. The main
-                    difference is the approach to styling for different screen sizes, and how to implement the text to
-                    the right hand side for mobile viewports</p>
-                <p>Remember to test your layouts at each breakpoint to ensure they are working as expected.</p>
+            <p>Everything you need to know is in our previous labwork on Responsive CSS Grid Layouts. The main
+                difference is the approach to styling for different screen sizes, and how to implement the text to
+                the right hand side for mobile viewports. However instead of percentages, you could use fractions. See below.</p>
+            <p>Remember to test your layouts at each breakpoint to ensure they are working as expected.</p>
         </article>
+        <article>
+            <h1>The <code>fr</code> Unit</h1>
+            <p>
+                The <code>fr</code> unit is a fractional unit, an input that automatically calculates layout
+                divisions when adjusting for gaps inside the grid.
+            </p>
+
+            <h2>Key Points</h2>
+            <ul>
+                <li>The <code>fr</code> unit allows you to define grid tracks as fractions of the available space.</li>
+                <li>If a grid container has 4 columns with <code>1fr</code> each, they will each take up an equal amount of space (25% each).</li>
+                <li>Using different fractional values allows for varied column sizes within the same grid.</li>
+            </ul>
+        </article>
+
     </main>
     </section>
 
