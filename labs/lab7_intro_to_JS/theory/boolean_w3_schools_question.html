@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Logical OR Example Explained</title>
+    <link rel="stylesheet" href="solarized.css">
+    <style>
+        code {
+            background: var(--base2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        .diagram {
+            background: var(--base2);
+            border-left: 4px solid var(--blue);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: "Courier New", monospace;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .note {
+            background: #fff7cc;
+            border-left: 4px solid var(--yellow);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--base1);
+            padding-top: 10px;
+            color: var(--base1);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Understanding <code>let x = (5 == 5 || 5 &lt; 2);</code></h1>
+
+    <h2>What actually happens</h2>
+    <p>
+        The parentheses <code>(5 == 5 || 5 &lt; 2)</code> are an <strong>expression</strong>.
+        Inside the parentheses:
+    </p>
+
+    <ul>
+        <li><code>5 == 5</code> evaluates to <code>true</code></li>
+        <li><code>5 &lt; 2</code> evaluates to <code>false</code></li>
+        <li>
+            The logical OR operator <code>||</code> returns <code>true</code> if <em>either</em> side is true.
+        </li>
+    </ul>
+
+    <div class="diagram">
+        (5 == 5 || 5 < 2)
+            → (true || false)
+            → true
+            </div>
+
+            <p>Finally:</p>
+
+            <div class="diagram">
+                let x = true;
+            </div>
+
+            <p>
+                That line <strong>assigns</strong> the boolean value <code>true</code> to the variable <code>x</code>.
+            </p>
+
+            <p>
+                In other words, the code is saying:
+                <br> “Assign to <code>x</code> the result of checking whether 5 is equal to 5 or less than 2.” <br>i.e.,<br>
+
+                “Set <code>x</code> to <code>true</code> if <code>5 == 5</code> or <code>5 &lt; 2</code> — otherwise set it to <code>false</code>.”
+            </p>
+    </div>
+
+    <footer>
+    
+    </footer>
+
+</body>
+
+</html>

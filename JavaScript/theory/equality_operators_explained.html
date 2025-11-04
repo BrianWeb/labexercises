@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>= vs == vs === in JavaScript — Solarized Light Edition</title>
+  <link rel="stylesheet" href="solarized.css">
+</head>
+
+<body>
+    <h1>= vs == vs === in JavaScript</h1>
+    <p>
+        JavaScript has three different operators that use the equals sign:
+        <code>=</code>, <code>==</code>, and <code>===</code>.
+        They look similar but perform very different functions.
+    </p>
+
+    <article>
+        <h2>1. <code>=</code> The Assignment Operator</h2>
+        <p>
+            <strong>Used to assign</strong> a value to a variable.
+            It does <em>not</em> compare anything — it simply stores a value.
+        </p>
+
+        <div class="diagram">
+            <span class="keyword">let</span> age <span class="assign">=</span> 25; <span class="comment">// assigns 25 to age</span>
+            <span class="keyword">let</span> name <span class="assign">=</span> <span class="string">"Alice"</span>; <span class="comment">// assigns "Alice" to name</span>
+        </div>
+
+        <div class="note">
+            ⚠️ Using <code>=</code> inside a conditional statement instead of <code>==</code> or <code>===</code> is a common programming error.
+        </div>
+    </article>
+    <article>
+        <h2>2. <code>==</code> The Loose Equality Operator</h2>
+        <p>
+            <strong>Compares values after type conversion (coercion).</strong>
+            If the types differ, JavaScript tries to convert one value to match the other.
+        </p>
+
+        <div class="diagram">
+            <span class="string">"5"</span> <span class="loose">==</span> 5 <span class="comment">// true → "5" converted to number 5</span>
+            false <span class="loose">==</span> 0 <span class="comment">// true → false converted to 0</span>
+            null <span class="loose">==</span> undefined <span class="comment">// true → both represent “no value”</span>
+        </div>
+
+        <p>Because coercion is automatic, <code>==</code> can produce surprising results.</p>
+    </article>
+
+    <article>
+        <h2>3. <code>===</code> The Strict Equality Operator</h2>
+        <p>
+            <strong>Compares values without type conversion.</strong>
+            Both the value and its type must be identical for <code>===</code> to return <code>true</code>.
+        </p>
+
+        <div class="diagram">
+            <span class="string">"5"</span> <span class="strict">===</span> 5 <span class="comment">// false → string vs number</span>
+            5 <span class="strict">===</span> 5 <span class="comment">// true → same type, same value</span>
+            false <span class="strict">===</span> 0 <span class="comment">// false → boolean vs number</span>
+        </div>
+
+        <div class="note">
+            Best practice: <strong>always use <code>===</code></strong> (and <code>!==</code>) for equality checks.
+        </div>
+    </article>
+
+    <article>
+        <h2>Interactive Demo</h2>
+        <p>Compare any two values using <code>==</code> and <code>===</code>:</p>
+
+        <div class="example">
+            <label>Value 1: <input type="text" id="val1" value="5" /></label><br>
+            <label>Value 2: <input type="text" id="val2" value='"5"' /></label><br>
+            <button class="btn" onclick="compare()">Compare</button>
+            <div id="output" class="result"></div>
+        </div>
+
+        <script>
+            function compare() {
+                try {
+                    const val1 = eval(document.getElementById("val1").value);
+                    const val2 = eval(document.getElementById("val2").value);
+                    const loose = val1 == val2;
+                    const strict = val1 === val2;
+
+                    document.getElementById("output").innerHTML = `
+      Value 1: ${String(val1)} (${typeof val1})<br>
+      Value 2: ${String(val2)} (${typeof val2})<br><br>
+      val1 == val2 → ${loose}<br>
+      val1 === val2 → ${strict}
+    `;
+                } catch {
+                    document.getElementById("output").innerHTML = "<strong>Error:</strong> invalid input!";
+                }
+            }
+        </script>
+    </article>
+
+    <article>
+        <h2>Summary Table</h2>
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Purpose</th>
+                <th>Type Conversion?</th>
+                <th>Example</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td><code>=</code></td>
+                <td>Assignment</td>
+                <td>No</td>
+                <td><code>x = 10</code></td>
+                <td>Stores 10 in x</td>
+            </tr>
+            <tr>
+                <td><code>==</code></td>
+                <td>Loose Equality</td>
+                <td>Yes</td>
+                <td><code>"5" == 5</code></td>
+                <td>true</td>
+            </tr>
+            <tr>
+                <td><code>===</code></td>
+                <td>Strict Equality</td>
+                <td>No</td>
+                <td><code>"5" === 5</code></td>
+                <td>false</td>
+            </tr>
+        </table>
+    </article>
+
+    <footer>
+
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JavaScript == vs === Type Coercion Flow</title>
+<style>
+  /* ---------- Solarized Light Palette ---------- */
+  :root {
+    --base03: #002b36;
+    --base02: #073642;
+    --base01: #586e75;
+    --base00: #657b83;
+    --base0:  #839496;
+    --base1:  #93a1a1;
+    --base2:  #eee8d5;
+    --base3:  #fdf6e3;
+    --yellow: #b58900;
+    --orange: #cb4b16;
+    --red:    #dc322f;
+    --magenta:#d33682;
+    --violet: #6c71c4;
+    --blue:   #268bd2;
+    --cyan:   #2aa198;
+    --green:  #859900;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--base3);
+    color: var(--base00);
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 1rem;
+    line-height: 1.6;
+  }
+
+  h1, h2 {
+    color: var(--blue);
+  }
+
+  .diagram {
+    background: var(--base2);
+    border-left: 4px solid var(--blue);
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .comment { color: var(--base1); font-style: italic; }
+  .keyword { color: var(--green); }
+  .string { color: var(--orange); }
+  .number { color: var(--cyan); }
+  .bool   { color: var(--violet); }
+  .null   { color: var(--magenta); }
+  .arrow  { color: var(--blue); font-weight: bold; }
+  .result { color: var(--red); font-weight: bold; }
+
+  .flowbox {
+    background: var(--base2);
+    padding: 15px;
+    border-radius: 6px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--yellow);
+  }
+
+  .btn {
+    background: var(--blue);
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0;
+  }
+  .btn:hover { background: var(--cyan); }
+
+  #demo-result {
+    background: var(--base2);
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    margin-top: 10px;
+  }
+
+  footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: var(--base1);
+    border-top: 1px solid var(--base1);
+    padding-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>JavaScript <code>==</code> Type Coercion Flow</h1>
+
+<p>
+The loose equality operator <code>==</code> converts values to a common type before comparing them.
+This process is called <strong>type coercion</strong>.  
+Below is a visual guide showing what happens internally when you use <code>==</code> versus <code>===</code>.
+</p>
+
+<h2>1️⃣ Strict Equality (<code>===</code>)</h2>
+
+<div class="diagram">
+If types differ → <span class="result">false</span>
+Otherwise, compare the values directly.
+
+Examples:
+"5" === 5   → <span class="result">false</span>  <span class="comment">// different types</span>
+5 === 5     → <span class="result">true</span>   <span class="comment">// same type, same value</span>
+</div>
+
+<h2>2️⃣ Loose Equality (<code>==</code>) — Coercion Flow</h2>
+
+<div class="flowbox">
+<b>Step 1:</b> If both values are the same type → compare directly.  
+<b>Step 2:</b> If one is <code>null</code> and the other is <code>undefined</code> → <code>true</code>.  
+<b>Step 3:</b> If one is a string and the other a number → convert string → number.  
+<b>Step 4:</b> If one is a boolean → convert boolean → number.  
+<b>Step 5:</b> If one is an object → convert object → primitive (using <code>valueOf()</code> or <code>toString()</code>).  
+<b>Step 6:</b> Compare again.
+</div>
+
+<h3>Examples</h3>
+
+<div class="diagram">
+<span class="string">"5"</span> <span class="arrow">→</span> <span class="number">5</span>
+"5" == 5   → <span class="result">true</span>
+
+<span class="bool">false</span> <span class="arrow">→</span> <span class="number">0</span>
+false == 0 → <span class="result">true</span>
+
+<span class="null">null</span> == <span class="keyword">undefined</span> → <span class="result">true</span>
+
+<span class="keyword">[]</span> <span class="arrow">→</span> <span class="string">""</span> <span class="arrow">→</span> <span class="number">0</span>
+[] == 0 → <span class="result">true</span>
+
+<span class="keyword">[]</span> == <span class="bool">false</span>
+[] <span class="arrow">→</span> "" <span class="arrow">→</span> 0
+false <span class="arrow">→</span> 0
+→ <span class="result">true</span>
+</div>
+
+<h2>3️⃣ Interactive Demo</h2>
+<p>Try comparing any two JavaScript values using both <code>==</code> and <code>===</code>:</p>
+
+<input type="text" id="val1" value='"5"' />  
+<input type="text" id="val2" value='5' />  
+<br>
+<button class="btn" onclick="compare()">Compare</button>
+
+<div id="demo-result"></div>
+
+<script>
+function compare() {
+  try {
+    const val1 = eval(document.getElementById('val1').value);
+    const val2 = eval(document.getElementById('val2').value);
+
+    const loose = val1 == val2;
+    const strict = val1 === val2;
+
+    let explanation = '';
+    if (loose && !strict) {
+      explanation = '→ true with == because JavaScript performed type coercion.';
+    } else if (!loose && strict) {
+      explanation = '→ true with === because both value and type match.';
+    } else if (!loose && !strict) {
+      explanation = '→ false for both; they differ by value or type.';
+    } else {
+      explanation = '→ true for both; same type and same value.';
+    }
+
+    document.getElementById('demo-result').innerHTML = `
+      Value 1: ${String(val1)} (${typeof val1})<br>
+      Value 2: ${String(val2)} (${typeof val2})<br><br>
+      val1 == val2 → ${loose}<br>
+      val1 === val2 → ${strict}<br><br>
+      <em>${explanation}</em>
+    `;
+  } catch (err) {
+    document.getElementById('demo-result').innerHTML = '<strong>Error:</strong> Invalid input!';
+  }
+}
+</script>
+
+<h2>4️⃣ Summary</h2>
+<ul>
+  <li><code>===</code> → No type conversion, safer and predictable.</li>
+  <li><code>==</code> → Converts types before comparison; can be convenient but risky.</li>
+  <li>Only safe shorthand: <code>x == null</code> (to check for <code>null</code> or <code>undefined</code>).</li>
+</ul>
+
+<footer>
+© 2025 JavaScript Learning Resource — Visual Coercion Flow (Solarized Light Edition)
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Logic Truth Tables — Solarized Light</title>
+    <link rel="stylesheet" href="solarized.css">
+  <style>
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+
+    th, td {
+      border: 1px solid var(--base1);
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--blue);
+      color: white;
+    }
+
+    .demo-box {
+      background: var(--base2);
+      border-left: 4px solid var(--yellow);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+    .toggle {
+      background: white;
+      border: 1px solid var(--base1);
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .toggle.active-true {
+      background: #d0ebd0;
+      border-color: #4ba44b;
+    }
+
+    .toggle.active-false {
+      background: #f8d6d6;
+      border-color: #d64545;
+    }
+
+    .result-box {
+      background: white;
+      border: 1px solid var(--base1);
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-family: "Courier New", monospace;
+      margin-top: 6px;
+    }
+
+    code {
+      background: var(--base2);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid var(--base1);
+      padding-top: 10px;
+      color: var(--base1);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>JavaScript Logical Operators: Truth Tables</h1>
+  <p>
+    These are the basic boolean operators in JavaScript: <code>||</code> (OR), <code>&&</code> (AND), and <code>!</code> (NOT).
+    The tables below show what the result will be for every combination of <code>true</code> and <code>false</code>.
+  </p>
+
+  <h2>1. OR (<code>||</code>)</h2>
+  <p><strong>Rule:</strong> OR is <em>true</em> if <em>either</em> side is true.</p>
+  <table>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>A || B</th>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>false</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+  </table>
+
+  <h2>2. AND (<code>&amp;&amp;</code>)</h2>
+  <p><strong>Rule:</strong> AND is <em>true</em> only if <em>both</em> sides are true.</p>
+  <table>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>A && B</th>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>true</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+  </table>
+
+  <h2>3. NOT (<code>!</code>)</h2>
+  <p><strong>Rule:</strong> NOT flips a boolean value.</p>
+  <table>
+    <tr>
+      <th>A</th>
+      <th>!A</th>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>true</td>
+    </tr>
+  </table>
+
+  <h2>Interactive Demo</h2>
+  <p>Pick <strong>A</strong> and <strong>B</strong> and see the result for <code>||</code> and <code>&amp;&amp;</code>:</p>
+
+  <div class="demo-box">
+    <div>
+      <strong>A:</strong>
+      <div class="btn-group">
+        <button class="toggle" id="a-true" onclick="setA(true)">true</button>
+        <button class="toggle" id="a-false" onclick="setA(false)">false</button>
+      </div>
+    </div>
+    <div>
+      <strong>B:</strong>
+      <div class="btn-group">
+        <button class="toggle" id="b-true" onclick="setB(true)">true</button>
+        <button class="toggle" id="b-false" onclick="setB(false)">false</button>
+      </div>
+    </div>
+
+    <div class="result-box" id="logic-result">
+      A = true<br>
+      B = false<br>
+      A || B = true<br>
+      A && B = false<br>
+      !A = false
+    </div>
+  </div>
+
+  <script>
+    // defaults
+    let A = true;
+    let B = false;
+
+    function updateDisplay() {
+      const orResult = A || B;
+      const andResult = A && B;
+      const notA = !A;
+      const box = document.getElementById("logic-result");
+      box.innerHTML = `
+        A = ${A}<br>
+        B = ${B}<br>
+        A || B = ${orResult}<br>
+        A && B = ${andResult}<br>
+        !A = ${notA}
+      `;
+
+      // update button states
+      document.getElementById("a-true").className = "toggle" + (A ? " active-true" : "");
+      document.getElementById("a-false").className = "toggle" + (!A ? " active-false" : "");
+      document.getElementById("b-true").className = "toggle" + (B ? " active-true" : "");
+      document.getElementById("b-false").className = "toggle" + (!B ? " active-false" : "");
+    }
+
+    function setA(val) {
+      A = val;
+      updateDisplay();
+    }
+
+    function setB(val) {
+      B = val;
+      updateDisplay();
+    }
+
+    // initialise
+    updateDisplay();
+  </script>
+
+  <footer>
+  
+  </footer>
+</body>
+</html>
