@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Front-End Development Test – CSS Grid and Flexbox</title>
+  <style>
+    :root {
+      --base-bg: #fdf6e3;
+      --base-text: #073642;
+      --accent: #04528a;
+      --border: #93a1a1;
+      --heading-bg: #eee8d5;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--base-bg);
+      color: var(--base-text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--heading-bg);
+      border-bottom: 3px solid var(--accent);
+      padding: 1rem 2rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.3rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      color: rgb(0, 99, 56)
+    }
+
+    img {
+      max-width: 200px;
+    }
+
+    p,
+    li {
+      font-size: 1rem;
+    }
+
+    ul {
+      margin-top: 0.3rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      background-color: #fff;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 0.6rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--heading-bg);
+    }
+
+    .image-box {
+      background-color: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+
+    .highlight {
+      background-color: #eee8d5;
+      border-left: 5px solid var(--accent);
+      padding: 0.8rem;
+      margin: 1.2rem 0;
+    }
+
+    footer {
+      background-color: var(--heading-bg);
+      border-top: 3px solid var(--accent);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Interactive Web Design Test</h1>
+    <p><strong>Topic:</strong> Responsive Layouts using CSS Grid and Flexbox</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>📘 Overview</h2>
+      <p>
+        In this test, you will demonstrate your ability to create a <strong>responsive web layout</strong> using
+        both <strong>CSS Grid</strong> and <strong>CSS Flexbox</strong>. This assesses your ability to apply concepts independently, as a front-end developer would in practice.
+      </p>
+      <p>
+        It is an open-book test so you may consult online documentation (such as W3Schools or MDN) but <strong>AI tools are not permitted</strong>.
+
+      </p>
+
+    </section>
+
+    <section>
+      <h2>🧩 Files to Create</h2>
+      <ol>
+        <li><code>index.html</code> – Main HTML file</li>
+        <li><code>main.css</code> – External stylesheet</li>
+        <li><code>HondaWN7.jpg (used for Task2: Flexbox)</code> –
+        </li>
+        <div>
+          <a href="images/HondaWN7.jpg" download>
+            <img src="images/HondaWN7.jpg" alt="Honda WN7"><br>
+            Click here or on the image to download it. </a>
+        </div>
+      </ol>
+    </section>
+
+
+
+    <section>
+      <h2>🧭 Task 1 — Creating a Responsive CSS Grid Layout (60 Marks)</h2>
+
+      <div class="highlight">
+        <p><strong>Objective:</strong> Create a responsive webpage layout that adapts from a
+          <em>single-column mobile view</em> to a <em>multi-column desktop view</em> using CSS Grid, as shown below.
+        </p>
+      </div>
+
+      <div class="image-box">
+        <img src="images/grid_layout.png" alt="Responsive CSS Grid Layout Example">
+      </div>
+
+      <h3>Requirements</h3>
+      <ul>
+        <li>Use whatever techniques you think are most efficent to create the Logo, Navigation and Main sections.</li>
+        <li>Use <strong>CSS Grid</strong> to structure the footer.</li>
+        <li>Keep the page as semantic as possible.</li>
+        <div><a href="https://www.w3schools.com/html/html5_semantic_elements.asp" download>See https://www.w3schools.com/html/html5_semantic_elements.asp</a></div>
+        <li>On mobile (<768px): all sections appear in a single column.</li>
+        <li>On desktop (≥768px): Logo and Navigation share the top row, Main spans the full width below, and a three column footer (or 3 footers - depending on how you wish to code it) should go side by side at the bottom.</li>
+        <li>Use any combination of <code>fr</code>, <code>%</code>, or <code>auto</code> units for Grid widths.</li>
+        <li>Apply minimal styling (background colour, padding, spacing) for clarity.</li>
+      </ul>
+
+      <h3>Marking Breakdown</h3>
+      <table>
+        <tr>
+          <th>Criterion</th>
+          <th>Description</th>
+          <th>Marks</th>
+        </tr>
+        <tr>
+          <td>HTML Structure</td>
+          <td>Correct semantic elements and layout setup</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Grid Setup</td>
+          <td>Proper use of <code>display: grid</code> and column control</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>Responsive Behaviour</td>
+          <td>Layout adjusts correctly at 768px breakpoint</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>Visual Clarity</td>
+          <td>Readable layout with clear spacing and styling</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th colspan="2" style="text-align:right;">Total</th>
+          <th>60</th>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>🧭 Task 2 — Creating Responsive Flexbox Layouts (40 Marks)</h2>
+
+      <div class="highlight">
+        <p><strong>Objective:</strong> Inside your <code>&lt;main&gt;</code> section, create
+          <strong>a responsive Flexbox layout</strong> using text content and the <em>Honda WN7</em> image, as shown below.
+        </p>
+      </div>
+      <h3>Layout 1: Mobile Size Screens / Viewports </h3>
+      <div class="image-box">
+        <img src="images/honda_flexbox_example_mobile.png" alt="Responsive CSS Grid Layout Example">
+      </div>
+
+      <h3>Layout 2: Tablet and Larger Size Screens / Viewports ≥768px</h3>
+      <div class="image-box">
+        <img src="images/honda_flexbox_example_laptop.png" alt="Flexbox Layout 2 - Mobile version showing image stacked above text">
+      </div>
+
+      <!-- <h3>Image Requirement</h3>
+      <ul>
+        <li>Use the <strong>HondaWN7.jpg</strong> image provided on Brightspace (or your own image if preferred).</li>
+        <li>Save it in a newly created <i>images</i> folder along with your HTML and CSS files.</li>
+      </ul>
+
+       
+      
+      
+       <p>
+
+        On <strong>mobile</strong>, stack the image above the text (same as Layout 1).
+        On <strong>desktop</strong>, the <em>image</em> should appear on the <em>left</em> and the <em>text</em> beside or below it, using <code>flex-direction: row-reverse</code> or equivalent.
+      </p>
+
+
+
+      <p>
+        Reproduce the layout below. On <strong>mobile</strong>, the image should appear <em>above</em> the text.
+        On <strong>desktop</strong>, the text should appear <em>on the left</em> and the image <em>on the right</em>.
+      </p>
+      <div class="image-box">
+        <img src="honda_flexbox_example_laptop.png" alt="Flexbox Layout 1 - Laptop version showing text on left and image on right">
+      </div>
+-->
+      <p>Use the <strong>HondaWN7.jpg</strong> image provided on above (or your own image if preferred).</p>
+
+      <h3>Marking Breakdown</h3>
+
+      <table>
+        <tr>
+          <th>Criterion</th>
+          <th>Description</th>
+          <th>Marks</th>
+        </tr>
+        <tr>
+          <td>HTML Setup</td>
+          <td>Correct use of sections, headings, and image</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Flexbox Layout 1</td>
+          <td>Accurate use of Flexbox and responsive change</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Flexbox Layout 2</td>
+          <td>Correct reverse ordering and responsiveness</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Visual Clarity</td>
+          <td>Consistent alignment and spacing across devices</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th colspan="2" style="text-align:right;">Total</th>
+          <th>40</th>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>🧾 Submission Instructions</h2>
+      <ol>
+        <li>Test your layout by resizing your browser window from mobile to desktop width.</li>
+        <li>Upload your files in a zipped folder Brightspace under <strong>“Test – Responsive Layout (Grid + Flexbox)”</strong>.</li>
+        <li>Include <code>index.html</code>, <code>main.css</code>, and <code>HondaWN7.jpg</code>.</li>
+      </ol>
+    </section>
+
+  </main>
+  <!--  <footer>
+    <p>© Front-End Development Test — Responsive Layouts (CSS Grid & Flexbox) | Total Marks: 100</p>
+  </footer>
+-->
+
+</body>
+
+</html>
