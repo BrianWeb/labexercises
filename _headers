@@ -1,0 +1,28 @@
+/*
+  # -------------------------------------------
+  # 🛡️ Security Headers (Best Practice for Netlify)
+  # -------------------------------------------
+
+  # Prevent clickjacking (site cannot be iframed by others)
+  X-Frame-Options: SAMEORIGIN
+
+  # Stop browsers from MIME-sniffing content type
+  X-Content-Type-Options: nosniff
+
+  # Modern replacement for X-Frame/XSS-Protection, controls trusted origins
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; connect-src 'self' https:; frame-ancestors 'self'; upgrade-insecure-requests
+
+  # Older XSS fallback (still supported by some browsers)
+  X-XSS-Protection: 1; mode=block
+
+  # Control what referrer information is sent when navigating away
+  Referrer-Policy: no-referrer-when-downgrade
+
+  # Tell browsers to always use HTTPS (HSTS)
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Limit access to certain browser APIs
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), fullscreen=(self)
+
+  # (Optional) Hide server type to reduce fingerprinting
+  Server: SecureServer
