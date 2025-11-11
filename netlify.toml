@@ -5,9 +5,6 @@
 
 # netlify.toml
 
-[build]
-  publish = "public" # or "dist" or your build folder
-  command = "npm run build" # adjust if you use a build step
 
 # Force HTTP → HTTPS
 [[redirects]]
