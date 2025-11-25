@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Why Images Need max-width: 100%</title>
+    <link rel="stylesheet" href="../../main.css">
+    <link rel="stylesheet" href="img_width.css">
+</head>
+
+<body>
+
+    <h1>Why Images Need <code>max-width: 100%</code></h1>
+
+    <p>
+        In web design, a common issue happens when an image is wider than the box (container)
+        that holds it. The container might be small (such as <code>width: 200px</code>),
+        but the image might be large (such as <code>400px</code> wide).
+    </p>
+
+    <p>
+        If we do nothing, **the image will overflow out of its container**, breaking the layout.
+        To prevent this, we often give images this CSS:
+    </p>
+
+    <pre><code>img {
+    max-width: 100%;
+    height: auto;
+}
+</code></pre>
+
+    <p>
+        This does <strong>not</strong> mean “make the image 100% of its own natural width”.
+        It means:
+    </p>
+
+    <p style="background:#ffffcc; padding:10px; border-left:4px solid #999;">
+        <strong>“Make the image no wider than 100% of the width of the container it is inside.”</strong>
+    </p>
+
+    <p>
+        So if the container is only 200px wide, the 400px image shrinks down to fit.
+    </p>
+
+    <h2>Example</h2>
+
+    <div class="example-container">
+
+        <!-- Example 1: Overflowing -->
+        <div class="example">
+            <div class="label">❌ Image without max-width: 100%</div>
+            <article>
+                <img src="dog_400px_wide.jpg"
+                    alt="Example image 400px wide">
+                <p>The article is only 200px wide → image overflows!</p>
+            </article>
+        </div>
+
+        <!-- Example 2: Scaled correctly -->
+        <div class="example scaled">
+            <div class="label">✅ Image with max-width: 100%</div>
+            <article>
+                <img src="dog_400px_wide.jpg"
+                    alt="Example image 400px wide">
+                <p>The image now shrinks to match the 200px container.</p>
+            </article>
+        </div>
+
+    </div>
+<p>The image is the same 400px wide image file in both cases.</p>
+    <h2>Why This Works</h2>
+
+    <p>
+        When CSS sees <code>max-width: 100%</code> on an image:
+    </p>
+
+    <ul>
+        <li>The browser checks the width of the container (in this case <strong>200px</strong>)</li>
+        <li>It ensures the image never becomes wider than that</li>
+        <li>If the image is naturally larger (e.g., <strong>400px</strong>) it scales down</li>
+        <li>The image keeps its original shape because <code>height: auto</code> is set</li>
+    </ul>
+
+    <p>
+        This is why <strong>responsive web design almost always uses max-width: 100% on images</strong> —
+        it prevents layout breakage on small screens or narrow columns.
+    </p>
+
+
+
+   
+
+<h1>Images in a CSS Grid: <code>max-width</code> vs <code>width</code></h1>
+
+<p>
+In a grid layout, each grid cell can be a percentage of the screen.
+But what happens if the image inside the cell is too small to fill it?
+</p>
+
+<p>
+Below, each grid item is <strong>40% of the screen width</strong> (which will usually be over 200px wide).
+The image is a small image at only <strong>200px</strong>-wide.
+</p>
+
+<div class="grid">
+
+    <!-- Example 1: max-width (image stays small) -->
+    <div class="grid-item example max">
+        <div class="label">❌ Using max-width: 100%</div>
+        <img src="dog_200px_wide.jpg"
+             alt="Small example image">
+        <p>
+            The image is only 200px wide. Because it uses
+            <code>max&#8205;-&#8205;width:&nbsp;100%</code>, it will <strong>not stretch</strong>.
+            It stays at its natural size, so it looks small inside the grid cell.
+        </p>
+    </div>
+
+    <!-- Example 2: width (image stretches) -->
+    <div class="grid-item example stretch">
+        <div class="label">✅ Using width: 100%</div>
+        <img src="dog_200px_wide.jpg"
+             alt="Small example image">
+        <p>
+            Here, <code>width: 100%</code> forces the image to stretch
+            to fill the entire grid cell.
+            This makes the grid layout look more consistent.
+        </p>
+    </div>
+
+</div>
+
+<h2>When to Use Each</h2>
+
+<ul>
+    <li>
+        <strong>Use max-width: 100%</strong>  
+        when you want images to <em>shrink</em> but not <em>stretch</em>.
+    </li>
+    <li>
+        <strong>Use width: 100%</strong>  
+        when you need the image to completely fill its container
+        (e.g., a grid cell or card layout).
+    </li>
+</ul>
+
+<h2>Important Note About Image Quality</h2>
+
+<p style="background:#ffffcc; padding:10px; border-left:4px solid #999;">
+If the image is too small, stretching it with <code>width: 100%</code> will
+cause pixelation or blurriness.
+The solution is to use a <strong>larger or higher-resolution image</strong>.
+</p>
+
+
+
+</body>
+
+</html>
