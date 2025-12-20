@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Irish Contract Law – Feedback, Model Answer & Marking Rubric</title>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.06);
+      --card-2: rgba(255,255,255,0.08);
+      --text: rgba(0, 0, 0, 0.92);
+      --muted: rgb(24, 24, 24);
+      --muted-2: rgba(255,255,255,0.60);
+      --border: rgba(255,255,255,0.12);
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --good: #34d399;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 14px 40px rgba(0,0,0,0.35);
+      --shadow-sm: 0 10px 25px rgba(0,0,0,0.25);
+
+      --max: 1050px;
+      --pad: clamp(16px, 2vw, 24px);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .skip{
+      position: absolute;
+      left:-999px;
+      top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      z-index: 999;
+    }
+    .skip:focus{ left: 12px; }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navwrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px var(--pad);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .brand{
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      min-width: 220px;
+    }
+    .logo{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(125,211,252,0.9), rgba(167,139,250,0.9));
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(255,255,255,0.20);
+    }
+    .brand h1{
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      line-height: 1.15;
+    }
+    .brand p{
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    nav ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a{
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--text);
+      background: transparent;
+      font-size: 13px;
+    }
+    nav a:hover{
+      border-color: var(--border);
+      background: rgba(255,255,255,0.05);
+      text-decoration: none;
+    }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 26px var(--pad) 48px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 2.2vw, 28px);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(500px 220px at 30% 10%, rgba(125,211,252,0.18), transparent 60%),
+        radial-gradient(520px 240px at 75% 10%, rgba(167,139,250,0.16), transparent 60%);
+      pointer-events: none;
+    }
+    .hero > *{ position: relative; }
+
+    .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-size: 12px;
+    }
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: var(--good);
+      box-shadow: 0 0 0 4px rgba(52,211,153,0.15);
+    }
+
+    .hero h2{
+      margin: 12px 0 6px;
+      font-size: clamp(22px, 2.4vw, 32px);
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+    }
+    .hero p{
+      margin: 0;
+      max-width: 78ch;
+      font-size: 14.5px;
+    }
+
+    .grid{
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.25fr 0.75fr;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      box-shadow: var(--shadow-sm);
+      padding: 18px;
+    }
+
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+    }
+
+    .meta{
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .pillrow{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      white-space: nowrap;
+    }
+
+    details{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    summary{
+      cursor: pointer;
+      padding: 16px 18px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    summary::-webkit-details-marker{ display: none; }
+
+    .chev{
+      width: 26px;
+      height: 26px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      flex: 0 0 auto;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+
+    .content{
+      padding: 0 18px 18px;
+
+    }
+    .content p, .content li{
+
+      font-size: 14px;
+    }
+
+    .content h4{
+      margin: 14px 0 8px;
+      font-size: 14px;
+
+    }
+
+    .callout{
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 14px 14px;
+      margin: 12px 0;
+    }
+
+
+    .gradebar{
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .bar{
+      display: grid;
+      gap: 6px;
+    }
+    .bar label{
+      font-size: 12px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .track{
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      overflow: hidden;
+    }
+    .fill{
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(125,211,252,0.95), rgba(167,139,250,0.95));
+    }
+    .fill.w72{ width: 72%; }
+    .fill.w78{ width: 78%; }
+    .fill.w85{ width: 85%; }
+    .fill.w90{ width: 90%; }
+
+    .two-col{
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 780px){
+      .two-col{ grid-template-columns: 1fr; }
+    }
+
+    .blockquote{
+      margin: 12px 0 0;
+      padding: 14px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+
+      font-size: 13.5px;
+    }
+
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 10px var(--pad) 28px;
+   
+      font-size: 12px;
+    }
+
+    .tiny{
+      font-family: var(--mono);
+      font-size: 12px;
+
+    }
+
+    .tag{
+      display:inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-size: 12px;
+   
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* Print-friendly */
+    @media print{
+      header, .kicker, nav, .pillrow{ display:none !important; }
+      .card, details, .hero{ box-shadow: none; background: #fff; border-color:#ddd; }
+      .content p, .content li, .hero p{ color:#111; }
+      a{ color:#000; text-decoration: underline; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="navwrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Irish Contract Law</h1>
+          <p>Feedback • Model Answer • First-Class Rubric</p>
+        </div>
+      </div>
+
+      <nav aria-label="Page navigation">
+        <ul>
+          <li><a href="#question">Question</a></li>
+          <li><a href="#feedback">Feedback</a></li>
+          <li><a href="#model">Model Answer</a></li>
+          <li><a href="#rubric">Marking Rubric</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <div><h3>BP's Prompt</h3>
+    <p><i>can you please play the role of a solicitor and lecture in the republic of ireland dealing with the country's laws. Here is an exam question. further below is the student's answer. Can you please advise the student of how they might improve their answer?</i></p>
+    </div>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="kicker"><span class="dot" aria-hidden="true"></span> Solicitor &amp; Lecturer-style notes (Republic of Ireland)</div>
+      <h2 id="hero-title">Sheila v Ted (Family Promise, Forbearance, Minor)</h2>
+      <p>
+        A copy-ready webpage containing: (1) structured feedback on the student draft, (2) a high-2.1/First-class model answer,
+        and (3) an examiner-style rubric explaining why the model reaches a First.
+      </p>
+
+      <div class="pillrow" aria-label="Key topics">
+        <span class="pill">Intention to create legal relations</span>
+        <span class="pill">Consideration by forbearance</span>
+        <span class="pill">Contracts with minors</span>
+        <span class="pill">Problem-question technique</span>
+        <span class="pill">OSCOLA &amp; authority use</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card" id="question">
+        <h3>Exam Question (Provided)</h3>
+        <p class="muted">
+          At a family wedding, Sheila discovers that her 15-year-old nephew Ted has started smoking and drinking alcohol. Sheila
+          tells Ted that if he does not drink alcohol or smoke or use any other intoxicating substance between now and when he turns 18,
+          she will buy him a car worth €20,000 for his 18th birthday. Ted agrees. They draft an agreement at the table, both sign and date it,
+          and Ted keeps it. Shortly before Ted turns 18, he reminds Sheila. Sheila laughs and says he must be joking. Ted claims it is a legally
+          enforceable contract. Sheila says it was not intended to be serious and they are family so there is no contract. Sheila wants advice.
+        </p>
+
+        <div class="callout">
+          <strong>Marking criteria (as supplied):</strong>
+          <div class="pillrow" style="margin-top:10px">
+            <span class="pill">Substantive Content 70%</span>
+            <span class="pill">Research 10%</span>
+            <span class="pill">Referencing 10% (OSCOLA)</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Quick View</h3>
+        <div class="meta">
+          <div><span class="tag">Client</span> Sheila</div>
+          <div><span class="tag">Opposing</span> Ted (minor at formation)</div>
+          <div><span class="tag">Setting</span> Family wedding</div>
+          <div><span class="tag">Promise</span> Car worth €20,000</div>
+          <div><span class="tag">Condition</span> Abstain until 18</div>
+          <div><span class="tag">Key battleground</span> Intention + minority</div>
+        </div>
+
+        <div class="gradebar" aria-label="Indicative mark profile">
+          <div class="bar">
+            <label><span>Indicative overall</span><span class="tiny">First range</span></label>
+            <div class="track"><div class="fill w78" aria-hidden="true"></div></div>
+          </div>
+          <div class="bar">
+            <label><span>Application</span><span class="tiny">very strong</span></label>
+            <div class="track"><div class="fill w90" aria-hidden="true"></div></div>
+          </div>
+          <div class="bar">
+            <label><span>Authority use</span><span class="tiny">selective</span></label>
+            <div class="track"><div class="fill w85" aria-hidden="true"></div></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- FEEDBACK -->
+    <details id="feedback" open>
+      <summary>
+        <span>1) Feedback on the student’s draft (how to improve)</span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </summary>
+      <div class="content">
+        <p>
+          This draft shows clear effort and structure, but it currently reads more like a general contract law essay than a focused Irish-law
+          problem answer. The biggest mark gains come from: (i) stronger application, (ii) correct and deeper treatment of minors’ contracts,
+          (iii) using authority more selectively, and (iv) giving decisive advice to Sheila.
+        </p>
+
+        <h4>Overall strengths</h4>
+        <ul>
+          <li>Clear IRAC-style organisation and sensible issue spotting.</li>
+          <li>Engagement with case law and secondary sources.</li>
+          <li>Good instinct on forbearance as a form of consideration.</li>
+        </ul>
+
+        <h4>Main improvements (mapped to the marking scheme)</h4>
+
+        <div class="two-col">
+          <div class="callout">
+            <strong>Substantive Content (70%)</strong>
+            <ul>
+              <li><strong>Trim textbook definitions</strong>: offer/acceptance/certainty are not disputed—state briefly and move on.</li>
+              <li><strong>Intention is the real battleground</strong>: family wedding context strongly supports no legal intention; writing it down helps but is not decisive.</li>
+              <li><strong>Minors’ contracts need precision</strong>: avoid “most are void”; the key is limited capacity and protective policy—understanding/performance does not automatically make it enforceable against the adult.</li>
+              <li><strong>Stop over-weighting witnessing</strong>: a solicitor/witness is not required for a simple contract; raising this can undermine confidence.</li>
+              <li><strong>Conclude decisively</strong>: advise Sheila clearly rather than hedging.</li>
+            </ul>
+          </div>
+
+          <div class="callout">
+            <strong>Research (10%) &amp; OSCOLA (10%)</strong>
+            <ul>
+              <li><strong>Anchor in Irish law</strong>: English/US cases can be persuasive but must be treated as such, and Irish commentary should be foregrounded.</li>
+              <li><strong>Quality over quantity</strong>: fewer authorities, better deployed, is stronger than long lists of loosely connected cases.</li>
+              <li><strong>OSCOLA consistency</strong>: ensure journal citations and editions are consistent; signal persuasive authorities explicitly.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="blockquote">
+          <strong>Key examiner note:</strong> The draft contains lots of law, but not enough <em>legal judgment</em>.
+          A First-class script selects the decisive issues (intention + minority), applies them tightly to the facts, and gives confident advice.
+        </div>
+      </div>
+    </details>
+
+    <!-- MODEL ANSWER -->
+    <details id="model" open>
+      <summary>
+        <span>2) High-2.1 / First-class model answer (Irish solicitor/lecturer style)</span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </summary>
+
+      <div class="content">
+        <h4>Introduction</h4>
+        <p>
+          Sheila seeks advice as to whether an agreement she entered into with her 15-year-old nephew, Ted, at a family wedding is legally
+          enforceable. She promised to buy Ted a car worth €20,000 if he abstained from alcohol, smoking, and other intoxicating substances
+          until his eighteenth birthday. Ted claims he complied fully and now seeks performance. Sheila contends that the arrangement was a
+          family understanding, never intended to have legal effect.
+        </p>
+        <p>
+          The key issues are: (1) whether the agreement was intended to create legal relations despite its family context; (2) whether Ted provided
+          valid consideration; and (3) the effect of Ted’s minority on enforceability under Irish law.
+        </p>
+
+        <h4>Intention to Create Legal Relations</h4>
+        <p>
+          Intention to create legal relations is an essential requirement for contractual enforceability. While commercial agreements benefit from a
+          rebuttable presumption of legal intention, family and social arrangements are presumed not to be legally binding. This presumption is
+          exemplified by <em>Balfour v Balfour</em> [1919] 2 KB 571, where a domestic agreement was held not to give rise to legal obligations, and
+          by <em>Lens v Devonshire Club</em> [1914], where a social promise was treated as unenforceable. By contrast, <em>Merritt v Merritt</em> [1970]
+          1 WLR 1211 illustrates that the presumption may be rebutted where surrounding circumstances clearly demonstrate legal intention.
+        </p>
+        <p>
+          Here, the agreement was made in a plainly familial, social setting (a wedding) between an aunt and nephew. There is no commercial context,
+          no legal advice, and no indication that either party discussed legal consequences at the time. Although the promise was reduced to writing
+          and signed, this alone is not necessarily sufficient to rebut the presumption against legal intention in family arrangements, particularly where
+          the apparent purpose is encouragement and moral guidance rather than legal commitment.
+        </p>
+        <p>
+          Accordingly, Sheila has a strong argument that the arrangement lacked the requisite intention to create legal relations.
+        </p>
+
+        <h4>Consideration</h4>
+        <p>
+          Consideration requires that the promisee confer a benefit on the promisor or incur a detriment at the promisor’s request. Forbearance may
+          constitute valid consideration (see <em>Currie v Misa</em> (1875) LR 10 Ex 153). In <em>Hamer v Sidway</em> (1891) 124 NY 538 (a US authority
+          and therefore persuasive only), the court treated a nephew’s forbearance from drinking and smoking as good consideration for his uncle’s promise.
+        </p>
+        <p>
+          On these facts, Ted’s abstinence could arguably amount to consideration. However, the argument is weakened because Ted was already legally
+          restricted from some of the relevant conduct for part of the period due to his age. While full abstinence may go beyond statutory restrictions,
+          its “value” as consideration is not wholly straightforward. In any event, even if consideration exists, enforceability still depends on intention and capacity.
+        </p>
+
+        <h4>Capacity and Contracts with Minors</h4>
+        <p>
+          The most significant issue is Ted’s age at formation. Under Irish law, minors have limited contractual capacity. Contracts for necessaries or those
+          clearly for the minor’s benefit may be binding, but agreements falling outside these categories are generally not enforceable against a minor and, crucially,
+          are not readily enforceable by a minor against an adult where policy requires the minor’s protection.
+        </p>
+        <p>
+          The protective rationale is illustrated in <em>Leslie Ltd v Sheill</em> [1914] 3 KB 607, where the court refused to enforce contractual remedies against
+          a minor despite misrepresentation, reflecting the strong policy of protecting minors from the consequences of improvident agreements. In this case, the agreement
+          is not one for necessaries, nor is it essential to Ted’s maintenance or education. While Ted may argue that the agreement was beneficial and fully performed,
+          performance and understanding do not, of themselves, overcome the protective rules governing minors’ capacity.
+        </p>
+        <p>
+          This point strongly supports Sheila: even if the arrangement looked like a bargain, Ted’s minority at the time of contracting presents a substantial barrier to enforcement.
+        </p>
+
+        <h4>Certainty and Formality</h4>
+        <p>
+          The terms are reasonably clear: abstinence until 18 in exchange for a car worth €20,000. However, certainty alone does not cure the absence of intention or capacity.
+          No solicitor’s witnessing is required for a simple contract, but the informal setting and family context reinforce the view that this was a moral or social promise rather than
+          a legally enforceable obligation.
+        </p>
+
+        <h4>Conclusion and Advice</h4>
+        <p>
+          On balance, Sheila is unlikely to be legally obliged to provide the car. The agreement is best characterised as a family arrangement lacking intention to create legal relations.
+          Even if intention and consideration could be argued, Ted’s minority at formation creates a further and significant obstacle to enforceability. Sheila can therefore be advised that
+          she does not owe Ted a car in law, notwithstanding that Ted may feel morally aggrieved.
+        </p>
+      </div>
+    </details>
+
+    <!-- RUBRIC -->
+    <details id="rubric" open>
+      <summary>
+        <span>3) Marking rubric (why this reaches a First)</span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </summary>
+
+      <div class="content">
+        <p class="muted">
+          This rubric maps the model answer to the marking criteria you provided. It is written in an examiner tone and is suitable for internal moderation
+          or adapted student feedback.
+        </p>
+
+        <div class="callout">
+          <strong>Overall Grade Band:</strong> First Class (approx. 70–75%)<br />
+          <span class="muted">Basis: decisive issue selection, accurate doctrine, strong application, and clear advice.</span>
+        </div>
+
+        <h4>1) Substantive Content (70%)</h4>
+        <p><span class="tag">Awarded</span><strong>52–55 / 70</strong></p>
+
+        <ul>
+          <li><strong>Issue identification (Excellent):</strong> Focuses on intention + minority + consideration, rather than listing every contract element.</li>
+          <li><strong>Accuracy (Very strong):</strong> Correctly states the presumption against intention in family agreements and the protective approach to minors.</li>
+          <li><strong>Application (Outstanding):</strong> Each doctrine is tied directly to the facts (wedding setting, aunt–nephew, informality, age at formation).</li>
+          <li><strong>Minors’ contracts (First-class level):</strong> Avoids the common error that “understanding/performance = enforceable”. Uses <em>Leslie v Sheill</em> appropriately.</li>
+          <li><strong>Critical engagement (Strong):</strong> Notes fairness vs policy tension and the limits of forbearance where conduct is already restricted.</li>
+          <li><strong>Conclusion (Professional):</strong> Gives clear, reasoned advice to Sheila rather than an overly tentative ending.</li>
+        </ul>
+
+        <h4>2) Research (10%)</h4>
+        <p><span class="tag">Awarded</span><strong>8–9 / 10</strong></p>
+        <ul>
+          <li>Authorities are <strong>selective and purposeful</strong> (no padding).</li>
+          <li>Persuasive authority is treated as persuasive (e.g. <em>Hamer</em>), not binding.</li>
+          <li>Demonstrates independent reading and legal judgment (quality over quantity).</li>
+        </ul>
+
+        <h4>3) Referencing (OSCOLA) (10%)</h4>
+        <p><span class="tag">Awarded</span><strong>9 / 10</strong></p>
+        <ul>
+          <li>Cases are cited correctly and integrated smoothly into analysis.</li>
+          <li>Minor deductions only if footnote formatting is imperfect in a full submission.</li>
+        </ul>
+
+        <h4>Structure &amp; Style (implicit expectation)</h4>
+        <ul>
+          <li>Clear, examiner-friendly headings and flow.</li>
+          <li>Client-advice tone appropriate to “Sheila comes to you for advice”.</li>
+          <li>No wasted words on undisputed basics; prioritises decisive issues.</li>
+        </ul>
+
+        <div class="blockquote">
+          <strong>Examiner’s overall comment (model):</strong><br />
+          “A well-structured and analytically strong answer. The student demonstrates a clear grasp of Irish contract principles and applies them accurately
+          to the facts. The discussion of intention and minors’ capacity is particularly strong. The conclusion is clear, reasoned, and appropriately decisive.
+          This meets First-class standard.”
+        </div>
+
+        <div class="callout">
+          <strong>Indicative mark:</strong> <span class="pill">72–75%</span>
+        </div>
+      </div>
+    </details>
+
+  </main>
+
+  <footer>
+    <div>
+      <strong>Tip:</strong> You can paste this into <span class="tiny">index.html</span>. If you prefer separate files, move the CSS into
+      <span class="tiny">styles.css</span> and link it with <span class="tiny">&lt;link rel="stylesheet" href="styles.css"&gt;</span>.
+    </div>
+  </footer>
+</body>
+</html>
