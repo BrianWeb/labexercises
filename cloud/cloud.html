@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Architecture: Types, Benefits, and Service Models</title>
+  <meta name="description" content="An easy-to-read guide to cloud architecture: what it is, how it works, why it matters, types of cloud, and IaaS/PaaS/SaaS." />
+
+  <style>
+    :root{
+      /* Accessible light theme */
+      --bg: #f3f4f6;          /* light grey page background */
+      --surface: #ffffff;     /* cards/sections */
+      --surface-2: #f9fafb;   /* subtle panels */
+      --text: #111827;        /* near-black */
+      --muted: #374151;       /* dark grey (still readable) */
+      --faint: #4b5563;       /* secondary */
+      --border: #d1d5db;      /* light border */
+      --shadow: 0 12px 28px rgba(0,0,0,.10);
+
+      /* High-contrast accents */
+      --accent: #0b5fff;      /* accessible blue */
+      --accent-2: #6d28d9;    /* purple (headings highlights) */
+      --good: #047857;        /* green */
+      --warn: #b45309;        /* amber/brown */
+      --bad: #b91c1c;         /* red */
+
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max: 1100px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a{
+      color: var(--accent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+    a:hover{ text-decoration: underline; }
+
+    /* Visible focus styles for keyboard users */
+    :focus-visible{
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    .skip{
+      position:absolute;
+      left:-999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    .skip:focus{
+      left:16px; top:16px;
+      width:auto; height:auto;
+      padding:10px 12px;
+      background:#fff;
+      color:#000;
+      border-radius:10px;
+      z-index:9999;
+      border: 2px solid var(--accent);
+    }
+
+    header{
+      padding: 44px 18px 22px;
+    }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(11,95,255,.95), rgba(109,40,217,.85));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .pill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--surface);
+      white-space: nowrap;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+      align-items:stretch;
+      margin-top: 14px;
+    }
+    @media (max-width: 940px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .hero-card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+    }
+    .lead{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 70ch;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+      text-decoration:none;
+    }
+    .btn:hover{
+      background: #eef2ff;
+    }
+    .btn.primary{
+      border-color: rgba(11,95,255,.35);
+      background: #e8f0ff;
+    }
+    .btn .dot{
+      width:10px; height:10px;
+      border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(11,95,255,.12);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 520px){
+      .stats{ grid-template-columns: 1fr; }
+    }
+    .stat{
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+    .stat .k{
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--faint);
+      margin-bottom: 6px;
+    }
+    .stat .v{
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+      color: #0f172a;
+    }
+    .stat .d{
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main{
+      padding: 0 18px 70px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap: 16px;
+      align-items:start;
+      margin-top: 16px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .toc{
+      position: sticky;
+      top: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .toc h2{
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: #0f172a;
+      letter-spacing:.2px;
+    }
+    .toc a{
+      display:block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      text-decoration:none;
+    }
+    .toc a:hover{
+      background: #eef2ff;
+      border-color: rgba(11,95,255,.25);
+      color: #0f172a;
+    }
+    .toc .meta{
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--faint);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+      gap: 16px;
+    }
+
+    section{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    section h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.2px;
+      color: #0f172a;
+    }
+    section h3{
+      margin: 16px 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+      color: #111827;
+    }
+
+    p{ margin: 0 0 12px; color: var(--muted); }
+    p strong{ color: #111827; }
+
+    .callout{
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      margin: 14px 0;
+    }
+    .badge{
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #ffffff;
+      box-shadow: 0 6px 14px rgba(0,0,0,.08);
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .callout .title{
+      margin: 0 0 4px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .callout .text{
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .list li{ margin: 8px 0; }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 900px){
+      .cards{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      padding: 14px;
+    }
+    .card .t{
+      font-weight: 900;
+      margin-bottom: 6px;
+      color: #0f172a;
+    }
+    .card .b{
+      margin:0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+    .tagrow{
+      display:flex;
+      gap: 8px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #0f172a;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #ffffff;
+      padding: 6px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .quote{
+      border-left: 5px solid var(--accent);
+      padding: 12px 14px;
+      background: #eef7ff;
+      border-radius: 12px;
+      margin: 14px 0;
+      color: #0f172a;
+    }
+    .quote p{ margin:0; color: #0f172a; }
+
+    .table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow:hidden;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin-top: 12px;
+    }
+    .table th, .table td{
+      padding: 12px 12px;
+      text-align:left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      color: var(--muted);
+      background: #ffffff;
+    }
+    .table th{
+      color: #0f172a;
+      background: #f3f4f6;
+      font-weight: 900;
+    }
+    .table tr:last-child td{ border-bottom: none; }
+
+    footer{
+      padding: 28px 18px 44px;
+      color: var(--faint);
+    }
+    footer .foot{
+      max-width: var(--max);
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap: 10px;
+      align-items:center;
+    }
+    .small{
+      font-size: 12.5px;
+      color: var(--faint);
+    }
+
+    /* Optional: slightly bigger body text on very large screens */
+    @media (min-width: 1200px){
+      body{ font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>Cloud Architecture Guide</div>
+        </div>
+        <div class="pill">Light theme • high readability</div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-card">
+          <h1>Cloud Architecture: what it is, why it matters, and how businesses use it</h1>
+          <p class="lead">
+            Cloud computing is no longer a business trend—it’s a new reality in the global market. This page breaks down
+            cloud architecture in clear sections: core concepts, frontend/backend components, cloud types, service models,
+            and practical reasons businesses adopt cloud solutions.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#what-is">
+              <span class="dot" aria-hidden="true"></span>
+              Start reading
+            </a>
+            <a class="btn" href="#service-models">Jump to IaaS / PaaS / SaaS</a>
+            <a class="btn" href="#components">See architecture components</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="stats" role="list">
+            <div class="stat" role="listitem">
+              <div class="k">Adoption</div>
+              <div class="v">97%</div>
+              <div class="d">of brands and organizations worldwide already use cloud services.</div>
+            </div>
+            <div class="stat" role="listitem">
+              <div class="k">Growth forecast</div>
+              <div class="v">16.4%</div>
+              <div class="d">compound annual growth rate (CAGR) cited for the cloud market.</div>
+            </div>
+            <div class="stat" role="listitem">
+              <div class="k">Market size (2024)</div>
+              <div class="v">$0.44T</div>
+              <div class="d">estimated global market size referenced for 2024.</div>
+            </div>
+            <div class="stat" role="listitem">
+              <div class="k">Market size (2029)</div>
+              <div class="v">$1.44T+</div>
+              <div class="d">projected market size referenced for 2029.</div>
+            </div>
+          </div>
+
+          <div class="quote" aria-label="Summary">
+            <p><strong>Big idea:</strong> moving an application to the cloud can boost efficiency — but designing a
+              full cloud architecture can lift a business to a whole new operational level.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <div class="grid">
+        <nav class="toc" aria-label="Table of contents">
+          <h2>On this page</h2>
+          <a href="#intro">1) Why cloud is accelerating</a>
+          <a href="#what-is">2) What is cloud architecture?</a>
+          <a href="#frontend-backend">3) Backend vs frontend</a>
+          <a href="#advantages-types">4) Advantages & cloud types</a>
+          <a href="#case-study">5) E-commerce case study</a>
+          <a href="#service-models">6) IaaS / PaaS / SaaS</a>
+          <a href="#reasons">7) Reasons to implement cloud</a>
+          <a href="#components">8) Core architecture components</a>
+          <a href="#source">Source</a>
+
+          <div class="meta">
+            <div><strong>Tip:</strong> Use the menu to jump sections.</div>
+            <div class="small" style="margin-top:8px;">Keyboard-friendly focus + readable contrast.</div>
+          </div>
+        </nav>
+
+        <div class="content">
+          <section id="intro">
+            <h2>1) Why cloud is accelerating</h2>
+            <p>
+              Cloud computing is no longer a business trend—it’s a new reality in the global market.
+              <strong>97% of brands and organizations worldwide already use cloud services.</strong>
+            </p>
+            <p>
+              Even so, the cloud computing market is still snowballing. With a compound annual growth rate of
+              <strong>16.4%</strong>, its size would increase from <strong>$0.44 trillion in 2024</strong> to
+              <strong>over $1.44 trillion in 2029</strong>.
+            </p>
+
+            <div class="callout">
+              <div class="badge" aria-hidden="true">✓</div>
+              <div>
+                <p class="title">Why the rise?</p>
+                <p class="text">
+                  Cloud tools are convenient, flexible, scalable, and cost-efficient — suitable for tiny agencies
+                  and massive enterprises alike.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              Moving a working application into the cloud may significantly boost a company’s efficiency. However, creating
+              a full-fledged cloud architecture may take business to a new operational level.
+            </p>
+
+            <p>
+              This guide introduces cloud architecture and highlights benefits and process improvements that can propel a
+              company forward — with the goal of streamlined operations and enhanced productivity.
+            </p>
+          </section>
+
+          <section id="what-is">
+            <h2>2) What is cloud architecture?</h2>
+            <p>
+              <strong>Cloud services architecture</strong> is vital to any service that uses cloud computing to create
+              smooth project operations and a convenient user experience. It can be a full-fledged infrastructure
+              or separate tools that grant secured, fast, and easy online access to business processes.
+            </p>
+
+            <p>
+              Cloud architecture is fundamental for businesses using any cloud technology. A well-tuned cloud infrastructure
+              helps complex enterprises create transparent resource planning systems in the cloud and develop scalable
+              on-demand systems for big data analytics.
+            </p>
+
+            <div class="callout">
+              <div class="badge" aria-hidden="true">i</div>
+              <div>
+                <p class="title">A simple mental model</p>
+                <p class="text">
+                  Think of cloud architecture as the “blueprint” for how your apps, data, security, and users connect —
+                  so everything runs reliably at scale.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="frontend-backend">
+            <h2>3) Backend vs frontend in cloud computing</h2>
+            <p>
+              Cloud computing architecture has two necessary components: <strong>backend</strong> and <strong>frontend</strong>.
+            </p>
+
+            <h3>Backend platform</h3>
+            <p>
+              The backend includes tools for storing, operating, and analyzing data — including servers, storage, and databases.
+              It also contains management tools for data warehouses and lakes, plus containerization and orchestration solutions.
+            </p>
+            <p>
+              Cloud computing requires a vast amount of server capability (shared or dedicated), depending on how fast, stable,
+              and reliable the service must be.
+            </p>
+            <p>
+              Backend architecture also includes security mechanisms, virtual machines, traffic control tools, and other elements
+              that manage data and business logic. Cloud teams often spend a lot of time handling how requests move from the
+              frontend through to execution in the backend.
+            </p>
+
+            <h3>Frontend platform</h3>
+            <p>
+              The frontend is the client side of an app: secure hosting and network routing for user interaction via web browsers,
+              mobile apps, computer programs, and connected IoT software.
+            </p>
+            <p>
+              A frontend platform is designed to help users interact with the backend, so it must include convenient,
+              easy-to-understand tools that allow people to access and operate the cloud platform and complete their goals.
+            </p>
+
+            <div class="cards" role="list">
+              <div class="card" role="listitem">
+                <div class="t">Backend focuses on…</div>
+                <p class="b">Data storage, processing, business logic, security, scaling, reliability, and management.</p>
+                <div class="tagrow">
+                  <span class="tag">servers</span>
+                  <span class="tag">databases</span>
+                  <span class="tag">security</span>
+                </div>
+              </div>
+              <div class="card" role="listitem">
+                <div class="t">Frontend focuses on…</div>
+                <p class="b">User access, routing, clients, interfaces, and “how people use the system.”</p>
+                <div class="tagrow">
+                  <span class="tag">web</span>
+                  <span class="tag">mobile</span>
+                  <span class="tag">IoT</span>
+                </div>
+              </div>
+              <div class="card" role="listitem">
+                <div class="t">Architecture connects…</div>
+                <p class="b">The frontend experience to backend capability — reliably and securely — as demand changes.</p>
+                <div class="tagrow">
+                  <span class="tag">routing</span>
+                  <span class="tag">traffic</span>
+                  <span class="tag">autoscale</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="advantages-types">
+            <h2>4) Advantages and types of cloud architecture design</h2>
+            <p>
+              Companies may delegate hardware needs to cloud systems. DevOps teams leverage cloud software architecture
+              principles to speed up the path from development to production.
+            </p>
+
+            <h3>Main advantages</h3>
+            <ul class="list">
+              <li><strong>Flexibility and scalability:</strong> use exactly as many resources as needed; scale in minutes.</li>
+              <li><strong>Stability and reliability:</strong> uptime guarantees up to <strong>99.99%</strong> (some even higher).</li>
+              <li><strong>Agility and innovation:</strong> deploy quicker; react faster to market changes.</li>
+              <li><strong>Financial shift:</strong> move from upfront costs to ongoing operating expenses.</li>
+            </ul>
+
+            <h3>Three main cloud types</h3>
+            <div class="cards" role="list">
+              <div class="card" role="listitem">
+                <div class="t">Public cloud</div>
+                <p class="b">Third-party framework; enables scaling without maintaining hardware/software.</p>
+              </div>
+              <div class="card" role="listitem">
+                <div class="t">Private cloud</div>
+                <p class="b">Dedicated system for one business; often chosen for security and compliance.</p>
+              </div>
+              <div class="card" role="listitem">
+                <div class="t">Hybrid cloud</div>
+                <p class="b">Private cloud + public cloud capacity for quick scaling while keeping controls.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="case-study">
+            <h2>5) Developing cloud architecture in e-commerce: a case study</h2>
+            <p>
+              Example: a serverless architecture solution for an e-commerce and fundraising platform, built with a serverless-first
+              approach to scale from MVP to high-traffic use.
+            </p>
+            <p>
+              The system is described as using <strong>AWS, Lambda, PostgreSQL, and DynamoDB</strong>, handling traffic spikes and
+              supporting <strong>400,000+ unique visitors</strong> at peak times.
+            </p>
+          </section>
+
+          <section id="service-models">
+            <h2>6) Cloud service models: IaaS, PaaS, SaaS</h2>
+            <p>
+              Businesses can use provider infrastructure rather than build everything from scratch — start small and expand over time.
+            </p>
+
+            <table class="table" aria-label="Cloud service models comparison">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>What it is</th>
+                  <th>What it’s used for (as described)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>IaaS</strong></td>
+                  <td>Infrastructure as a Service</td>
+                  <td>Store data; improve processes; migrate databases for stability and reduced physical-server costs.</td>
+                </tr>
+                <tr>
+                  <td><strong>PaaS</strong></td>
+                  <td>Platform as a Service</td>
+                  <td>Data engineering/analysis; platform + management tools for building/testing applications.</td>
+                </tr>
+                <tr>
+                  <td><strong>SaaS</strong></td>
+                  <td>Software as a Service</td>
+                  <td>Out-of-the-box apps delivered via the cloud; often customizable via APIs.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="reasons">
+            <h2>7) Reasons to implement cloud computing solutions</h2>
+
+            <h3>High-performance efficiency</h3>
+            <p>
+              Well-tuned cloud architecture can increase operational efficiency, improve governance, optimize workloads, and
+              enable automation (including AI cloud tools).
+            </p>
+
+            <h3>Cost optimization</h3>
+            <p>
+              Cloud migration can lower operating expenses across systems, though poor setup/management can introduce extra costs.
+            </p>
+
+            <h3>Solid reliability</h3>
+            <p>
+              Cloud services aim to reduce downtime, support autoscaling, and allow automated recovery processes.
+            </p>
+
+            <h3>High security level</h3>
+            <p>
+              Cloud security includes access control, encryption, and protection against breaches — but skills gaps can slow adoption.
+            </p>
+          </section>
+
+          <section id="components">
+            <h2>8) Components of cloud computing architecture</h2>
+            <ul class="list">
+              <li><strong>Client Infrastructure:</strong> interfaces users interact with (browsers/devices).</li>
+              <li><strong>Application:</strong> software used to access cloud services.</li>
+              <li><strong>Runtime Cloud Environment:</strong> offloads logic from devices to cloud virtual machines.</li>
+              <li><strong>Cloud Storage:</strong> distributed capacity across regions for availability and redundancy.</li>
+              <li><strong>Infrastructure:</strong> hardware/software resources across host, network, and application layers.</li>
+              <li><strong>Cloud Management:</strong> coordination of backend processes (apps, runtime, storage, infrastructure).</li>
+              <li><strong>Cloud Security:</strong> access control, encryption, and breach protection.</li>
+            </ul>
+          </section>
+
+          <section id="source">
+            <h2>Source</h2>
+            <p class="small">
+              Reference (as provided): <a href="https://tech-stack.com/blog/a-complete-guide-to-cloud-architecture-types-benefits-techstack/" target="_blank" rel="noopener">
+                tech-stack.com/blog/a-complete-guide-to-cloud-architecture-types-benefits-techstack/
+              </a>
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div class="small">© Cloud Architecture Guide • Light theme for accessibility</div>
+      <div class="small">Semantic HTML + responsive CSS • strong focus styles</div>
+    </div>
+  </footer>
+</body>
+</html>
