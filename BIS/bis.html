@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Big Data – Additional Slides (HTML)</title>
+  <style>
+    :root{
+      --bg:#f2f2f2;         /* light grey page background */
+      --card:#ffffff;       /* white “slide” background */
+      --text:#111111;       /* black text */
+      --muted:#444444;
+      --border:#e5e5e5;
+      --shadow: 0 1px 2px rgba(0,0,0,.08);
+      --radius: 14px;
+      --max: 980px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.5;
+    }
+    header{
+      position: sticky;
+      top: 0;
+      background: rgba(242,242,242,.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      z-index: 20;
+    }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 0;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brand h1{
+      font-size: 18px;
+      margin:0;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .brand p{
+      margin:0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color: var(--text);
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    nav a:hover{ outline: 2px solid #ddd; }
+    main{ padding: 18px 0 40px; }
+    .slide{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 16px;
+      margin: 14px 0;
+    }
+    .slide h2{
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .tag{
+      display:inline-block;
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: #fafafa;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    ul{
+      margin: 0;
+      padding-left: 20px;
+    }
+    li{ margin: 6px 0; }
+    .subhead{
+      margin: 12px 0 6px;
+      font-weight: 700;
+    }
+    .note{
+      margin-top: 12px;
+      padding: 12px 12px;
+      background: #fafafa;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer{
+      color: var(--muted);
+      font-size: 12px;
+      padding: 20px 0 40px;
+    }
+    code.inline{
+      background: #f7f7f7;
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .95em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Big Data – Extra Slides</h1>
+        <p>Simple “YouTube-like” layout: light grey background + white slide cards</p>
+      </div>
+      <nav aria-label="Slide navigation">
+        <a href="#slide-target">Target</a>
+        <a href="#slide-dik">Data→Info→Knowledge</a>
+        <a href="#slide-netflix">Netflix vs Blockbuster</a>
+        <a href="#slide-google">Google Maps</a>
+        <a href="#slide-4v">The 4th V</a>
+        <a href="#slide-discussion">Discussion</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Slide 1 -->
+  <section class="slide" id="slide-target">
+    <h2>Big Data Case Study – Target</h2>
+    <div class="tag">Company example: Target</div>
+    <ul>
+      <li>Target analysed millions of customer transactions.</li>
+      <li>They discovered certain items were frequently purchased together by pregnant women.</li>
+      <li>Products such as unscented lotion, vitamins and cotton balls formed a pattern.</li>
+      <li>Using this pattern, Target built a prediction model.</li>
+      <li>They began sending baby product coupons to customers before competitors knew they were expecting.</li>
+    </ul>
+
+    <div class="subhead">Why it’s memorable</div>
+    <ul>
+      <li>One father complained that his teenage daughter received baby coupons.</li>
+      <li>It turned out she was pregnant — and Target’s data had predicted it.</li>
+      <li><strong>Big Data Insight:</strong> it wasn’t one purchase that mattered — it was the pattern.</li>
+    </ul>
+
+    <div class="note">
+      Teaching prompt: “Which is more powerful: knowing one fact, or spotting a pattern across thousands of facts?”
+    </div>
+  </section>
+
+  <!-- Slide 2 -->
+  <section class="slide" id="slide-dik">
+    <h2>From Data to Knowledge (Retail Example)</h2>
+    <div class="tag">Concept: Data → Information → Knowledge → Action</div>
+
+    <div class="subhead">Data</div>
+    <ul>
+      <li>Product IDs</li>
+      <li>Customer IDs</li>
+      <li>Date &amp; time of purchase</li>
+      <li>Quantity</li>
+    </ul>
+
+    <div class="subhead">Information</div>
+    <ul>
+      <li>Customer A buys nappies and baby wipes weekly.</li>
+      <li>Customer B buys protein bars every Monday.</li>
+    </ul>
+
+    <div class="subhead">Knowledge</div>
+    <ul>
+      <li>Customer A likely has a baby.</li>
+      <li>Customer B likely attends the gym regularly.</li>
+      <li>Certain products are often bought together.</li>
+    </ul>
+
+    <div class="subhead">Business Action</div>
+    <ul>
+      <li>Targeted promotions</li>
+      <li>Cross-selling</li>
+      <li>Personalised marketing</li>
+      <li>Increased sales</li>
+    </ul>
+
+    <div class="note">
+      Key line: “Big Data creates value when it changes decisions and behaviour.”
+    </div>
+  </section>
+
+  <!-- Slide 3 -->
+  <section class="slide" id="slide-netflix">
+    <h2>Netflix vs Blockbuster – Data Wins</h2>
+    <div class="tag">Company example: Netflix vs Blockbuster</div>
+    <ul>
+      <li>Blockbuster relied on physical stores and late fees.</li>
+      <li>Netflix collected data on what customers watched, paused, re-watched and rated.</li>
+      <li>Netflix analysed viewing patterns across millions of users.</li>
+      <li>They recommended shows based on user behaviour.</li>
+      <li>They even created original shows based on viewing data.</li>
+    </ul>
+
+    <div class="subhead">Result</div>
+    <ul>
+      <li>Blockbuster filed for bankruptcy.</li>
+      <li>Netflix became a global streaming giant.</li>
+      <li><strong>Competitive advantage</strong> came from data insight — not store size.</li>
+    </ul>
+
+    <div class="note">
+      Class question: “Blockbuster had stores. Netflix had data. Which is easier to scale globally?”
+    </div>
+  </section>
+
+  <!-- Slide 4 -->
+  <section class="slide" id="slide-google">
+    <h2>Big Data in Everyday Life – Google Maps</h2>
+    <div class="tag">Company example: Google</div>
+    <ul>
+      <li>Google Maps does not use satellites to detect traffic jams.</li>
+      <li>It measures how fast phones using Maps are moving.</li>
+      <li>If many phones slow down in one location, it detects traffic.</li>
+      <li>It predicts arrival times based on millions of previous journeys.</li>
+      <li>Even if only 1% of drivers use Maps, that can still be thousands of data points daily.</li>
+    </ul>
+
+    <div class="subhead">Big Data allows</div>
+    <ul>
+      <li>Real-time decision making</li>
+      <li>Accurate predictions</li>
+      <li>Continuous improvement</li>
+      <li>The more data collected, the smarter the system becomes</li>
+    </ul>
+
+    <div class="note">
+      Quick analogy: “Your phone becomes a sensor. Millions of sensors become a prediction engine.”
+    </div>
+  </section>
+
+  <!-- Slide 5 -->
+  <section class="slide" id="slide-4v">
+    <h2>The 4th V – Value</h2>
+    <div class="tag">Extension: beyond Volume, Velocity, Variety</div>
+    <ul>
+      <li><strong>Volume</strong> – large amounts of data</li>
+      <li><strong>Velocity</strong> – speed of data generation</li>
+      <li><strong>Variety</strong> – different formats of data</li>
+      <li><strong>Veracity</strong> – accuracy and reliability</li>
+    </ul>
+
+    <div class="subhead">Value – the most important V</div>
+    <ul>
+      <li>Data has no value unless it improves decisions.</li>
+      <li>Big Data is not about size — it is about smarter action.</li>
+      <li>The companies that extract value win.</li>
+    </ul>
+
+    <div class="note">
+      One-liner for first years: “Storage is not strategy. Decisions are strategy.”
+    </div>
+  </section>
+
+  <!-- Optional Slide 6 -->
+  <section class="slide" id="slide-discussion">
+    <h2>Is Big Data Brilliant or Creepy?</h2>
+    <div class="tag">Discussion slide (works well for first year)</div>
+    <ul>
+      <li>Should companies be allowed to predict personal events?</li>
+      <li>Is targeted advertising helpful or intrusive?</li>
+      <li>Should customers have more control over their data?</li>
+      <li>How does GDPR affect Big Data in Europe?</li>
+    </ul>
+
+    <div class="note">
+      Quick format: 2 minutes think → 3 minutes pair → 5 minutes class discussion.
+      <br />
+      Optional board prompt: <code class="inline">Benefit</code> vs <code class="inline">Privacy</code> vs <code class="inline">Fairness</code>
+    </div>
+  </section>
+
+  <footer>
+    Tip: If you want this to feel more “slide-like”, present in the browser (F11 full-screen) and scroll slide-by-slide.
+  </footer>
+
+</main>
+
+</body>
+</html>
