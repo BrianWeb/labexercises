@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Industry Rivalries, Milestones, and Core Concepts</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="mains.css">
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #4b5563;
+      --border: #d1d5db;
+      --accent: #0051a9;
+      --sky-blue: #0074a9;
+      --blood-orange: #ff4400;
+      --accent-soft: #e5e7eb;
+      --success: #ecfdf5;
+      --warning: #fff7ed;
+      --info: #eff6ff;
+      --danger: #fef2f2;
+      --menu-bg: #f8fafc;
+      --menu-active: #111827;
+      --menu-active-bg: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 1rem;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .progress-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.65);
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+
+    .progress-bar-scroll {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #111827 0%, #4b5563 100%);
+      transition: width 0.08s linear;
+    }
+
+    .page-layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .side-menu {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 1.2rem 1rem 1.5rem;
+      background: var(--menu-bg);
+      border-right: 1px solid var(--border);
+    }
+
+    .menu-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.9rem;
+      color: var(--accent);
+    }
+
+    .menu-subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .side-menu .nav-link {
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 0.52rem 0.68rem;
+      margin-bottom: 0.24rem;
+      font-size: 0.93rem;
+      line-height: 1.28;
+      border: 1px solid transparent;
+    }
+
+    .side-menu .nav-link:hover,
+    .side-menu .nav-link:focus {
+      color: var(--accent);
+      background: #ffffff;
+      border-color: var(--border);
+    }
+
+    .side-menu .nav-link.active {
+      color: var(--menu-active);
+      background: var(--menu-active-bg);
+      border-color: var(--border);
+      font-weight: 700;
+    }
+
+    .content {
+      width: 100%;
+    }
+
+    .deck {
+      width: min(1120px, 96%);
+      margin: 0 auto;
+      padding: 1rem 0 3rem;
+    }
+
+    .slide {
+      min-height: 100vh;
+      padding: 1rem 0;
+      display: grid;
+      align-items: center;
+    }
+
+    .slide-inner {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-slide {
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 38%),
+        linear-gradient(135deg, #eef2ff 0%, #f8fafc 45%, #ecfeff 100%);
+      border: 1px solid var(--border);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.08;
+      margin-bottom: 0.75rem;
+      color: var(--blood-orange);
+    }
+
+    .success {
+      background: var(--success);
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.5rem;
+      color: var(--sky-blue);
+    }
+
+    p,
+    li {
+      font-size: clamp(1rem, 1.2vw, 1.12rem);
+    }
+
+    .lead {
+      font-size: clamp(1.08rem, 1.6vw, 1.3rem);
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .soft {
+      background: var(--accent-soft);
+    }
+
+    .info {
+      background: var(--info);
+    }
+
+    .success {
+      background: var(--success);
+    }
+
+    .warning {
+      background: var(--warning);
+    }
+
+    .danger {
+      background: var(--danger);
+    }
+
+    ul {
+      margin: 0.5rem 0 0 1.15rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .pill {
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 0.95rem;
+    }
+
+    .case-study {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+    }
+
+    .label {
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.3rem 0.5rem;
+      background: var(--accent-soft);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+
+    .question-box {
+      border-left: 5px solid #111827;
+      padding: 0.85rem 1rem;
+      background: #f9fafb;
+      margin-top: 1rem;
+    }
+
+    .table-like {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .row-3>div {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem;
+      background: #fff;
+    }
+
+    .footer-note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero-grid .hero-stat {
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .think-box {
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .think-box summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.9rem 1rem;
+      font-weight: 700;
+      background: #f9fafb;
+      border-bottom: 1px solid transparent;
+    }
+
+    .think-box summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .think-box[open] summary {
+      border-bottom-color: var(--border);
+    }
+
+    .think-box-content {
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .think-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      margin-right: 0.55rem;
+      color: var(--muted);
+    }
+
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .7s ease;
+    }
+
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portrait-placeholder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .portrait-frame {
+      min-height: 420px;
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .portrait-inner {
+      max-width: 480px;
+    }
+
+    .portrait-label {
+      display: inline-block;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: .75rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+    }
+
+    .mobile-menu details {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      padding: 0.65rem 0.85rem;
+    }
+
+    .mobile-menu summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .mobile-menu ul {
+      margin-top: 0.75rem;
+      padding-left: 1rem;
+    }
+
+    .mobile-menu a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 960px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side-menu {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .deck {
+        width: min(940px, 94%);
+      }
+
+      .grid-2,
+      .grid-3,
+      .case-study,
+      .row-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .slide {
+        min-height: auto;
+      }
+
+      .portrait-frame {
+        min-height: 260px;
+      }
+    }
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#lecture-menu" data-bs-smooth-scroll="true" data-bs-root-margin="0px 0px -35%" tabindex="0">
+  <div class="progress-wrap" aria-hidden="true">
+    <div class="progress-bar-scroll" id="progress-bar-scroll"></div>
+  </div>
+
+  <div class="mobile-menu">
+    <details>
+      <summary>Lecture menu</summary>
+      <ul>
+        <li><a href="#slide-cover">1. Cover</a></li>
+        <li><a href="#slide-hook">2. Opening Story</a></li>
+        <li><a href="#slide-deep-blue">3. Deep Blue</a></li>
+        <li><a href="#slide-alpha-go-portrait">4. AlphaGo</a></li>
+        <li><a href="#slide-ai-concept-1">5. LLMs</a></li>
+        <li><a href="#slide-ai-concept-2">6. Machine Learning</a></li>
+        <li><a href="#slide-ai-concept-3">7. Data, Tokens, Parameters</a></li>
+        <li><a href="#slide-ai-concept-4">8. Generative vs Predictive</a></li>
+        <li><a href="#slide-ai-concept-5">9. Neural Networks</a></li>
+        <li><a href="#slide-ai-concept-6">10. Reinforcement Learning</a></li>
+        <li><a href="#slide-ai-concept-7">11. Hallucinations</a></li>
+        <li><a href="#slide-ai-concept-8">12. Bias &amp; Data</a></li>
+        <li><a href="#slide-ai-concept-9">13. What AI Is Not</a></li>
+        <li><a href="#slide-visual-timeline">14. Visual Timeline</a></li>
+        <li><a href="#slide-founder-grid">15. Founder Map</a></li>
+        <li><a href="#slide-founder-photos">16. Key Personalities</a></li>
+        <li><a href="#slide-xai-grok-insert">17. xAI vs Grok</a></li>
+        <li><a href="#slide-google-panic">18. Google Code Red</a></li>
+        <li><a href="#slide-innovators-dilemma">19. Strategic Risk</a></li>
+        <li><a href="#slide-altman">20. Altman Crisis</a></li>
+        <li><a href="#slide-ecosystem">21. AI Ecosystems</a></li>
+        <li><a href="#slide-ecosystem-diagram">22. Ecosystem Diagram</a></li>
+        <li><a href="#slide-ai-arms-race">23. AI Arms Race</a></li>
+        <li><a href="#slide-compute">24. Compute Race</a></li>
+        <li><a href="#slide-safety-acceleration">25. Safety vs Acceleration</a></li>
+        <li><a href="#slide-agi">26. AGI</a></li>
+        <li><a href="#slide-bis-implications">27. BIS Implications</a></li>
+        <li><a href="#slide-lecture-reflection">28. Reflection</a></li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="page-layout">
+    <nav class="side-menu" id="lecture-menu" aria-label="Lecture slide navigation">
+      <div class="menu-title">AI Industry Rivalries &amp; Concepts</div>
+      <div class="menu-subtitle">Scroll or jump between sections</div>
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" href="#slide-cover">1. Cover</a>
+        <a class="nav-link" href="#slide-hook">2. Opening Story</a>
+        <a class="nav-link" href="#slide-deep-blue">3. Deep Blue</a>
+        <a class="nav-link" href="#slide-alpha-go-portrait">4. AlphaGo</a>
+        <a class="nav-link" href="#slide-ai-concept-1">5. LLMs</a>
+        <a class="nav-link" href="#slide-ai-concept-2">6. Machine Learning</a>
+        <a class="nav-link" href="#slide-ai-concept-3">7. Data, Tokens, Parameters</a>
+        <a class="nav-link" href="#slide-ai-concept-4">8. Generative vs Predictive</a>
+        <a class="nav-link" href="#slide-ai-concept-5">9. Neural Networks</a>
+        <a class="nav-link" href="#slide-ai-concept-6">10. Reinforcement Learning</a>
+        <a class="nav-link" href="#slide-ai-concept-7">11. Hallucinations</a>
+        <a class="nav-link" href="#slide-ai-concept-8">12. Bias &amp; Data</a>
+        <a class="nav-link" href="#slide-ai-concept-9">13. What AI Is Not</a>
+        <a class="nav-link" href="#slide-visual-timeline">14. Visual Timeline</a>
+        <a class="nav-link" href="#slide-founder-grid">15. Founder Map</a>
+        <a class="nav-link" href="#slide-founder-photos">16. Key Personalities</a>
+        <a class="nav-link" href="#slide-xai-grok-insert">17. xAI vs Grok</a>
+        <a class="nav-link" href="#slide-google-panic">18. Google Code Red</a>
+        <a class="nav-link" href="#slide-innovators-dilemma">19. Strategic Risk</a>
+        <a class="nav-link" href="#slide-altman">20. Altman Crisis</a>
+        <a class="nav-link" href="#slide-ecosystem">21. AI Ecosystems</a>
+        <a class="nav-link" href="#slide-ecosystem-diagram">22. Ecosystem Diagram</a>
+        <a class="nav-link" href="#slide-ai-arms-race">23. AI Arms Race</a>
+        <a class="nav-link" href="#slide-compute">24. Compute Race</a>
+        <a class="nav-link" href="#slide-safety-acceleration">25. Safety vs Acceleration</a>
+        <a class="nav-link" href="#slide-agi">26. AGI</a>
+        <a class="nav-link" href="#slide-bis-implications">27. BIS Implications</a>
+        <a class="nav-link" href="#slide-lecture-reflection">28. Reflection</a>
+      </div>
+    </nav>
+
+    <main class="content">
+      <div class="deck">
+
+        <section class="slide" id="slide-cover">
+          <div class="slide-inner hero-slide fade-slide">
+            <span class="label">Lecture Theme</span>
+            <h1>The AI Race: Rivalries, Strategy, and Business Information Systems</h1>
+            <p class="lead">A story of founders, competition, disruption, platform power, and how artificial intelligence is reshaping modern business systems.</p>
+            <div class="pill-row">
+              <span class="pill">OpenAI</span>
+              <span class="pill">Microsoft</span>
+              <span class="pill">Google DeepMind</span>
+              <span class="pill">Anthropic</span>
+              <span class="pill">xAI / Grok</span>
+            </div>
+            <div class="grid-3 hero-grid mt-4">
+              <div class="card-box hero-stat">
+                <h3>People</h3>
+                <p>Founders, leaders, and breakaways shaped the industry.</p>
+              </div>
+              <div class="card-box hero-stat">
+                <h3>Power</h3>
+                <p>Cloud, compute, and distribution now matter as much as models.</p>
+              </div>
+              <div class="card-box hero-stat">
+                <h3>Business Impact</h3>
+                <p>These rivalries affect search, productivity, ERP, CRM, finance, and decision support.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-hook">
+          <div class="slide-inner fade-slide">
+            <span class="label">Opening Story</span>
+            <h1>The Week AI Became Real</h1>
+            <div class="grid-2">
+              <div class="card-box">
+                <h3>November 2022</h3>
+                <ul>
+                  <li>Students begin submitting AI-generated essays</li>
+                  <li>Programmers start using AI copilots daily</li>
+                  <li>Businesses realise search behaviour may change</li>
+                  <li>Technology firms declare internal emergencies</li>
+                </ul>
+              </div>
+              <div class="card-box info">
+                <h3>What changed?</h3>
+                <p>AI did not suddenly become intelligent overnight.</p>
+                <p><strong>What changed was accessibility.</strong></p>
+                <p>Millions of people could now interact with frontier AI through a simple chat interface.</p>
+              </div>
+            </div>
+            <div class="question-box">
+              <strong>Think:</strong> What technology shift in the past had a similar “sudden impact” feeling?
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-deep-blue">
+          <div class="slide-inner fade-slide">
+            <span class="label">AI Milestone</span>
+            <h2>IBM Deep Blue and the Defeat of Garry Kasparov</h2>
+            <div class="case-study">
+              <div class="card-box">
+                <h3>Why Deep Blue mattered</h3>
+                <p>In <strong>1997</strong>, IBM’s <strong>Deep Blue</strong> defeated world chess champion <strong>Garry Kasparov</strong> in a historic match. This was one of the first moments when the public clearly saw that a machine could outperform a human expert in a highly respected intellectual game.</p>
+                <h3 class="mt-3">What made it powerful?</h3>
+                <ul>
+                  <li>Deep Blue could evaluate huge numbers of possible chess positions very quickly.</li>
+                  <li>It combined specialised hardware with advanced chess search techniques.</li>
+                  <li>It did not “think” like a human, but it could calculate at extraordinary speed and depth.</li>
+                </ul>
+                <h3 class="mt-3">Why this matters in AI history</h3>
+                <ul>
+                  <li>It showed that computers could beat elite human decision-makers in narrow domains.</li>
+                  <li>It raised public interest in artificial intelligence long before ChatGPT.</li>
+                  <li>It reminds us that AI success often begins with <strong>specialised systems</strong>, not general intelligence.</li>
+                </ul>
+                <div class="question-box">
+                  <strong>Pause &amp; Think:</strong> Deep Blue beat a world champion, but could it write an essay, drive a car, or hold a conversation? What does that tell us about the difference between <strong>narrow AI</strong> and <strong>AGI</strong>?
+                </div>
+              </div>
+              <div class="card-box info portrait-placeholder">
+                <div class="portrait-frame">
+                  <div class="portrait-inner">
+
+                    <img src="Garry-Kasparov-Deep-Blue-IBM-computer.webp">
+                    <p class="mb-0">Garry Kasparov<br>or IBM Deep Blue team / machine image</p>
+                  </div>
+                </div>
+                <div class="footer-note mt-3">Garry Kasparov vs computer.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-alpha-go-portrait">
+          <div class="slide-inner fade-slide">
+            <span class="label">AI Milestone</span>
+            <h2>AlphaGo and the Defeat of Human Go Champions</h2>
+            <div class="case-study">
+              <div class="card-box">
+                <h3>Why AlphaGo mattered</h3>
+                <p>In <strong>2016</strong>, DeepMind’s <strong>AlphaGo</strong> defeated South Korean Go champion <strong>Lee Sedol</strong>. In <strong>2017</strong>, it also defeated Chinese world number one <strong>Ke Jie</strong>. These victories were especially significant because Go had long been seen as a game requiring intuition, pattern recognition, and creative judgement.</p>
+                <h3 class="mt-3">What made AlphaGo different?</h3>
+                <ul>
+                  <li>It used deep neural networks to evaluate board positions.</li>
+                  <li>It improved through self-play and reinforcement learning.</li>
+                  <li>It did not rely only on brute force search in the way older systems did.</li>
+                </ul>
+                <h3 class="mt-3">Why this matters in AI history</h3>
+                <ul>
+                  <li>It marked a major leap beyond rule-based game-playing systems.</li>
+                  <li>It showed that AI could learn highly complex strategies.</li>
+                  <li>It helped shift public discussion from “Can machines calculate?” to “Can machines learn?”</li>
+                </ul>
+                <div class="question-box">
+                  <strong>Pause &amp; Think:</strong> Deep Blue mainly showed the power of computation in a narrow task. AlphaGo showed the power of learning. Why is that an important step toward more capable AI systems?
+                </div>
+              </div>
+              <div class="card-box info portrait-placeholder">
+                <div class="portrait-frame">
+                  <div class="portrait-inner">
+                    <img src="AlphaGo-beats-master.jpg">
+                    <p class="mb-2"><strong>Suggested image:</strong></p>
+                    <p class="mb-0">Lee Sedol<br>or Ke Jie<br>or AlphaGo match photo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-1">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>What Is a Large Language Model (LLM)?</h2>
+            <div class="grid-2">
+              <div class="card-box info">
+                <h3>Simple explanation</h3>
+                <p>A <strong>Large Language Model</strong> is an AI system trained on very large amounts of text so that it can recognise patterns in language and generate likely next words, sentences, or responses.</p>
+                <ul>
+                  <li>It does not “understand” like a human in the full sense.</li>
+                  <li>It predicts language based on patterns learned from training data.</li>
+                  <li>It can be used for writing, summarising, coding, translation, and question answering.</li>
+                </ul>
+              </div>
+              <div class="card-box success">
+                <h3>Why it feels impressive</h3>
+                <ul>
+                  <li>It has seen huge amounts of language examples.</li>
+                  <li>It can generalise patterns across many domains.</li>
+                  <li>It produces fluent responses very quickly.</li>
+                </ul>
+                <div class="question-box"><strong>Important point:</strong> An LLM is not simply storing whole books in a database and copying them back. It is learning statistical patterns in language.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-2">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>What Is Machine Learning?</h2>
+            <div class="grid-3">
+              <div class="card-box">
+                <h3>Basic idea</h3>
+                <p>Machine learning is when a computer system improves its performance by learning patterns from data rather than following only fixed hand-written rules.</p>
+              </div>
+              <div class="card-box warning">
+                <h3>Typical process</h3>
+                <ul>
+                  <li>Collect data</li>
+                  <li>Train a model</li>
+                  <li>Test performance</li>
+                  <li>Use the model on new cases</li>
+                </ul>
+              </div>
+              <div class="card-box success">
+                <h3>Examples</h3>
+                <ul>
+                  <li>Spam filtering</li>
+                  <li>Fraud detection</li>
+                  <li>Demand forecasting</li>
+                  <li>Recommendation systems</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Simple contrast:</strong> Traditional programming tells the computer exactly what to do. Machine learning lets the computer discover useful patterns from examples.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-3">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>Training Data, Tokens, and Parameters</h2>
+            <div class="grid-3">
+              <div class="card-box info">
+                <h3>Training data</h3>
+                <p>This is the information the model learns from, such as text, images, transactions, or sensor data.</p>
+              </div>
+              <div class="card-box success">
+                <h3>Tokens</h3>
+                <p>Tokens are small pieces of text that a language model processes, such as words, parts of words, or punctuation.</p>
+              </div>
+              <div class="card-box warning">
+                <h3>Parameters</h3>
+                <p>Parameters are the internal numerical weights the model adjusts during training to learn patterns.</p>
+              </div>
+            </div>
+            <div class="question-box"><strong>Useful analogy:</strong> Training data is like the reading material. Tokens are the chunks of language being processed. Parameters are the learned internal settings that shape the model’s behaviour.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-4">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>Generative AI vs Predictive AI</h2>
+            <div class="grid-2">
+              <div class="card-box success">
+                <h3>Generative AI</h3>
+                <p>Generative AI creates new content based on patterns it has learned.</p>
+                <ul>
+                  <li>Writes text</li>
+                  <li>Creates images</li>
+                  <li>Generates code</li>
+                  <li>Produces summaries</li>
+                </ul>
+              </div>
+              <div class="card-box info">
+                <h3>Predictive AI</h3>
+                <p>Predictive AI estimates likely outcomes based on historical data.</p>
+                <ul>
+                  <li>Predicts demand</li>
+                  <li>Flags fraud risk</li>
+                  <li>Scores customer churn</li>
+                  <li>Forecasts sales</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Business point:</strong> Many firms were using predictive AI before the recent excitement around generative AI. ChatGPT made AI visible to the public, but AI in business has existed for years in forecasting, analytics, and automation.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-5">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>What Is a Neural Network?</h2>
+            <div class="grid-3">
+              <div class="card-box info">
+                <h3>Basic idea</h3>
+                <p>A neural network is a mathematical system inspired loosely by the structure of the human brain. It learns patterns by adjusting internal numerical connections.</p>
+              </div>
+              <div class="card-box success">
+                <h3>How learning happens</h3>
+                <ul>
+                  <li>Input data enters the network</li>
+                  <li>Signals pass through layers</li>
+                  <li>Errors are measured</li>
+                  <li>Connections are adjusted</li>
+                </ul>
+              </div>
+              <div class="card-box warning">
+                <h3>Why they matter</h3>
+                <p>Neural networks are the foundation of modern AI systems including image recognition, speech systems, and large language models.</p>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Simple analogy:</strong> Like adjusting many small dials until a machine produces better answers.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-6">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>What Is Reinforcement Learning?</h2>
+            <div class="grid-2">
+              <div class="card-box success">
+                <h3>Core idea</h3>
+                <p>Reinforcement learning allows AI systems to learn by trying actions and receiving rewards or penalties.</p>
+                <ul>
+                  <li>Good actions receive positive feedback</li>
+                  <li>Bad actions receive negative feedback</li>
+                  <li>The system gradually improves its strategy</li>
+                </ul>
+              </div>
+              <div class="card-box info">
+                <h3>Examples</h3>
+                <ul>
+                  <li>Game-playing AI (AlphaGo)</li>
+                  <li>Robot movement learning</li>
+                  <li>Recommendation optimisation</li>
+                  <li>Dynamic pricing systems</li>
+                </ul>
+                <div class="question-box"><strong>Think:</strong> How is this similar to how humans learn skills like driving or playing sport?</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-7">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>AI Hallucinations and Limitations</h2>
+            <div class="grid-2">
+              <div class="card-box danger">
+                <h3>What is a hallucination?</h3>
+                <p>Sometimes AI systems generate confident but incorrect information because they are predicting likely language patterns rather than checking verified facts.</p>
+              </div>
+              <div class="card-box">
+                <h3>Why this happens</h3>
+                <ul>
+                  <li>Training data gaps</li>
+                  <li>Ambiguous questions</li>
+                  <li>Over-generalisation</li>
+                  <li>Lack of real-world grounding</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box warning mt-3"><strong>Business risk:</strong> Managers must treat AI outputs as decision support — not unquestionable truth.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-8">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>Bias and Data Quality</h2>
+            <div class="grid-3">
+              <div class="card-box warning">
+                <h3>Bias risk</h3>
+                <p>AI systems can learn patterns that reflect historical inequality or poor decision-making.</p>
+              </div>
+              <div class="card-box info">
+                <h3>Data quality</h3>
+                <p>Inaccurate or incomplete data can lead to poor predictions and flawed recommendations.</p>
+              </div>
+              <div class="card-box success">
+                <h3>Good practice</h3>
+                <ul>
+                  <li>Human oversight</li>
+                  <li>Testing and auditing</li>
+                  <li>Diverse datasets</li>
+                  <li>Clear accountability</li>
+                </ul>
+              </div>
+            </div>
+            <div class="question-box"><strong>Discussion:</strong> Should businesses rely on AI decisions if they cannot fully explain how the model reached them?</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ai-concept-9">
+          <div class="slide-inner fade-slide">
+            <span class="label">Key AI Concepts</span>
+            <h2>Common Misconceptions About AI</h2>
+            <div class="grid-2">
+              <div class="card-box danger">
+                <h3>AI is not</h3>
+                <ul>
+                  <li>A human mind inside a machine</li>
+                  <li>Always correct or objective</li>
+                  <li>Fully autonomous in most business contexts</li>
+                  <li>A replacement for all jobs</li>
+                </ul>
+              </div>
+              <div class="card-box success">
+                <h3>AI is better understood as</h3>
+                <ul>
+                  <li>A powerful pattern-recognition tool</li>
+                  <li>A decision-support technology</li>
+                  <li>A productivity enhancer</li>
+                  <li>A system that still requires governance</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Key insight:</strong> The real business challenge is not whether AI is intelligent — but how organisations integrate it responsibly into information systems.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-visual-timeline">
+          <div class="slide-inner fade-slide">
+            <span class="label">Industry Evolution</span>
+            <h2>The Acceleration of Artificial Intelligence</h2>
+            <div style="margin-top:30px">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:25px;">
+                <div style="text-align:center;min-width:120px;">
+                  <div style="width:18px;height:18px;background:#111827;border-radius:50%;margin:auto"></div>
+                  <div style="margin-top:10px;font-weight:700">1997</div>
+                  <div>Deep Blue wins</div>
+                </div>
+                <div style="flex:1;height:4px;background:#e5e7eb;min-width:40px;"></div>
+                <div style="text-align:center;min-width:120px;">
+                  <div style="width:18px;height:18px;background:#111827;border-radius:50%;margin:auto"></div>
+                  <div style="margin-top:10px;font-weight:700">2016</div>
+                  <div>AlphaGo wins</div>
+                </div>
+                <div style="flex:1;height:4px;background:#e5e7eb;min-width:40px;"></div>
+                <div style="text-align:center;min-width:120px;">
+                  <div style="width:18px;height:18px;background:#111827;border-radius:50%;margin:auto"></div>
+                  <div style="margin-top:10px;font-weight:700">2022</div>
+                  <div>ChatGPT launch</div>
+                </div>
+                <div style="flex:1;height:4px;background:#e5e7eb;min-width:40px;"></div>
+                <div style="text-align:center;min-width:120px;">
+                  <div style="width:18px;height:18px;background:#111827;border-radius:50%;margin:auto"></div>
+                  <div style="margin-top:10px;font-weight:700">2023+</div>
+                  <div>AI race explodes</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-box soft"><strong>Insight:</strong> Breakthroughs are happening faster. The gap between major AI milestones is shrinking.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-founder-grid">
+          <div class="slide-inner fade-slide">
+            <span class="label">People Behind the Industry</span>
+            <h2>Founder Map: Who Built the Major AI Organisations?</h2>
+            <div class="grid-2">
+              <div class="card-box">
+                <h3>OpenAI</h3>
+                <p><strong>Key early figures:</strong> Sam Altman, Elon Musk, Greg Brockman, Ilya Sutskever, John Schulman, Wojciech Zaremba</p>
+                <p><strong>Original idea:</strong> Build advanced AI for broad human benefit, outside the control of one existing tech giant.</p>
+              </div>
+              <div class="card-box info">
+                <h3>DeepMind</h3>
+                <p><strong>Founders:</strong> Demis Hassabis, Shane Legg, Mustafa Suleyman</p>
+                <p><strong>Original idea:</strong> Build general-purpose learning systems and use AI to solve scientific and complex real-world problems.</p>
+              </div>
+              <div class="card-box success">
+                <h3>Anthropic</h3>
+                <p><strong>Key founders:</strong> Dario Amodei, Daniela Amodei and other former OpenAI researchers</p>
+                <p><strong>Original idea:</strong> Focus more strongly on reliable, steerable and safety-oriented frontier AI systems.</p>
+              </div>
+              <div class="card-box warning">
+                <h3>xAI</h3>
+                <p><strong>Founder:</strong> Elon Musk</p>
+                <p><strong>Original idea:</strong> Build a rival frontier AI lab and compete directly with OpenAI, Google and Anthropic.</p>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Main pattern:</strong> The frontier AI industry is not just a technology story. It is also a story of founders, research talent, competing values, governance disputes and strategic breakaways.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-founder-photos">
+          <div class="slide-inner fade-slide">
+            <span class="label">Industry Leaders</span>
+            <h2>Key Personalities Shaping AI</h2>
+            <div class="grid-3">
+              <div class="card-box">
+                <h3>Sam Altman</h3>
+                <p>Startup leader turned AI industry strategist. Focus on scaling AI adoption and commercial deployment.</p>
+              </div>
+              <div class="card-box info">
+                <h3>Elon Musk</h3>
+                <p>Technology entrepreneur advocating rapid innovation and competition. Founded xAI after leaving OpenAI.</p>
+              </div>
+              <div class="card-box success">
+                <h3>Demis Hassabis</h3>
+                <p>Neuroscientist and DeepMind co-founder focused on scientific AI and long-term research breakthroughs.</p>
+              </div>
+              <div class="card-box warning">
+                <h3>Dario Amodei</h3>
+                <p>Former OpenAI research leader. Founded Anthropic with strong emphasis on AI safety and reliability.</p>
+              </div>
+              <div class="card-box">
+                <h3>Satya Nadella</h3>
+                <p>Microsoft CEO who positioned AI as central to productivity software and cloud strategy.</p>
+              </div>
+              <div class="card-box danger">
+                <h3>Sundar Pichai</h3>
+                <p>Google CEO navigating the shift from search dominance to AI-driven information interfaces.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-xai-grok-insert">
+          <div class="slide-inner fade-slide">
+            <span class="label">Terminology</span>
+            <h2>xAI vs Grok — Company and Product</h2>
+            <div class="grid-2">
+              <div class="card-box success">
+                <h3>xAI</h3>
+                <ul>
+                  <li>The company founded by Elon Musk</li>
+                  <li>Builds the models, infrastructure and wider AI strategy</li>
+                  <li>Competes with OpenAI, Google DeepMind and Anthropic</li>
+                  <li>Positions itself around scientific discovery and understanding</li>
+                </ul>
+              </div>
+              <div class="card-box info">
+                <h3>Grok</h3>
+                <ul>
+                  <li>The chatbot / assistant product built by xAI</li>
+                  <li>Used for asking questions, writing, coding and search-style interaction</li>
+                  <li>Distributed on the web and through the X platform</li>
+                  <li>Comparable in role to how ChatGPT relates to OpenAI</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Where does the name “Grok” come from?</strong><br>The word comes from science fiction and means to understand something deeply and intuitively. So the naming idea is: <strong>xAI is the company; Grok is its chatbot; and “grok” suggests profound understanding.</strong></div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-google-panic">
+          <div class="slide-inner fade-slide">
+            <span class="label">Strategic Shock</span>
+            <h2>Why Google Panicked After ChatGPT</h2>
+            <div class="case-study">
+              <div class="card-box">
+                <h3>The threat</h3>
+                <ul>
+                  <li>Google’s core business depends heavily on search.</li>
+                  <li>ChatGPT showed that users might ask an AI assistant directly instead of searching through links.</li>
+                  <li>This created fear that conversational AI could weaken Google’s most profitable gateway to the web.</li>
+                </ul>
+                <h3 class="mt-3">Reported response</h3>
+                <ul>
+                  <li>Google reportedly treated ChatGPT as a “code red” moment.</li>
+                  <li>Leadership pushed teams to accelerate AI product work.</li>
+                  <li>Google later reorganised major AI efforts more tightly around DeepMind.</li>
+                </ul>
+              </div>
+              <div class="card-box danger">
+                <h3>Why this matters in business</h3>
+                <ul>
+                  <li>Even dominant firms can be disrupted by interface change.</li>
+                  <li>AI is not only a new tool — it can threaten existing revenue models.</li>
+                  <li>When the user interface changes, the whole competitive landscape can change.</li>
+                </ul>
+                <div class="question-box"><strong>Discussion:</strong> Was ChatGPT mainly a better technology, or was it a better way for users to access information?</div>
+              </div>
+            </div>
+            <details class="think-box">
+              <summary><span class="think-tag">Pause &amp; Think</span> Why would Google risk damaging its own core business?</summary>
+              <div class="think-box-content">
+                <p>Because waiting can be more dangerous than self-disruption.</p>
+                <ul>
+                  <li>A rival may redefine the market first.</li>
+                  <li>User habits can shift faster than large firms expect.</li>
+                  <li>Protecting the present too aggressively can cost the future.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-innovators-dilemma">
+          <div class="slide-inner fade-slide">
+            <span class="label">Strategy Lesson</span>
+            <h2>Sometimes Firms Must Hurt Today’s Business to Survive Tomorrow</h2>
+            <div class="case-study">
+              <div class="card-box">
+                <h3>The classic problem</h3>
+                <ul>
+                  <li>Successful firms build strong profitable business models.</li>
+                  <li>New technologies may threaten those same models.</li>
+                  <li>Leaders face a dilemma: protect current revenue or risk disruption.</li>
+                </ul>
+                <h3 class="mt-3">Example: Camera manufacturers</h3>
+                <ul>
+                  <li>Some firms were slow to adopt digital photography.</li>
+                  <li>They feared destroying their profitable film businesses.</li>
+                  <li>Competitors who embraced digital gained market leadership.</li>
+                </ul>
+              </div>
+              <div class="card-box warning">
+                <h3>Connection to AI and Google</h3>
+                <ul>
+                  <li>Conversational AI may reduce traditional search usage.</li>
+                  <li>Google still accelerated AI development despite risk.</li>
+                  <li>This reflects learning from past technology disruptions.</li>
+                </ul>
+                <div class="question-box"><strong>Discussion:</strong> Is it better to disrupt your own business or wait and react?</div>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Strategic insight:</strong> Long-term survival sometimes requires firms to accept short-term losses or cannibalisation.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-altman">
+          <div class="slide-inner fade-slide">
+            <span class="label">Industry Story</span>
+            <h2>The Sam Altman Leadership Crisis (2023)</h2>
+            <div class="case-study">
+              <div class="card-box">
+                <h3>What happened?</h3>
+                <ul>
+                  <li>OpenAI CEO Sam Altman was suddenly removed by the board.</li>
+                  <li>Board cited communication and governance concerns.</li>
+                  <li>Microsoft and employees reacted strongly.</li>
+                  <li>Hundreds of staff threatened to resign.</li>
+                  <li>Altman returned as CEO within days.</li>
+                </ul>
+                <h3 class="mt-3">Why this shocked the tech world</h3>
+                <ul>
+                  <li>Showed how fragile AI leadership structures were.</li>
+                  <li>Raised questions about who controls powerful AI.</li>
+                  <li>Highlighted tension between safety and commercial growth.</li>
+                </ul>
+              </div>
+              <div class="card-box warning">
+                <h3>BIS perspective</h3>
+                <ul>
+                  <li>Technology strategy depends on governance.</li>
+                  <li>Leadership instability can affect entire ecosystems.</li>
+                  <li>AI firms influence global business platforms.</li>
+                </ul>
+                <div class="question-box"><strong>Discussion:</strong> Should critical AI companies be run like startups or like public institutions?</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-ecosystem">
+          <div class="slide-inner fade-slide">
+            <span class="label">Strategic Competition</span>
+            <h2>The Emerging AI Ecosystems</h2>
+            <div class="grid-3">
+              <div class="card-box info">
+                <h3>Microsoft Ecosystem</h3>
+                <ul>
+                  <li>Cloud platform: Azure</li>
+                  <li>Key partner: OpenAI</li>
+                  <li>Products: Copilot, Bing AI</li>
+                  <li>Strategy: integrate AI into productivity tools</li>
+                </ul>
+              </div>
+              <div class="card-box success">
+                <h3>Google Ecosystem</h3>
+                <ul>
+                  <li>AI unit: Google DeepMind</li>
+                  <li>Models: Gemini</li>
+                  <li>Investments: Anthropic</li>
+                  <li>Strategy: defend search dominance</li>
+                </ul>
+              </div>
+              <div class="card-box warning">
+                <h3>xAI Ecosystem</h3>
+                <ul>
+                  <li>Founder: Elon Musk</li>
+                  <li>Product: Grok</li>
+                  <li>Platform integration: X (Twitter)</li>
+                  <li>Strategy: independent AI challenger</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Key Insight:</strong> AI competition is not only about models — it is about cloud platforms, data access, and distribution channels.</div>
+          </div>
+        </section>
+
+      
+
+        <section class="slide" id="slide-ai-arms-race">
+          <div class="slide-inner fade-slide">
+            <span class="label">Global Competition</span>
+            <h2>The Emerging AI Arms Race</h2>
+            <div class="grid-2">
+              <div class="card-box success">
+                <h3>Technology Firms</h3>
+                <ul>
+                  <li>Competing for talent and computing power</li>
+                  <li>Building proprietary AI ecosystems</li>
+                  <li>Integrating AI into core products</li>
+                </ul>
+              </div>
+              <div class="card-box warning">
+                <h3>Governments</h3>
+                <ul>
+                  <li>Funding national AI research</li>
+                  <li>Creating AI regulation strategies</li>
+                  <li>Viewing AI leadership as economic power</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box info mt-3"><strong>Big picture:</strong> AI competition is not only corporate — it has geopolitical dimensions.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-compute">
+          <div class="slide-inner fade-slide">
+            <span class="label">Infrastructure</span>
+            <h2>The AI Compute Race</h2>
+            <div class="grid-2">
+              <div class="card-box">
+                <h3>Why compute matters</h3>
+                <ul>
+                  <li>Training frontier AI models costs billions.</li>
+                  <li>Requires massive GPU clusters.</li>
+                  <li>Energy consumption is significant.</li>
+                  <li>Access to compute shapes who can compete.</li>
+                </ul>
+              </div>
+              <div class="card-box success">
+                <h3>Key players</h3>
+                <ul>
+                  <li>Nvidia — dominant AI chip supplier</li>
+                  <li>Microsoft — building global data centres</li>
+                  <li>Google — custom TPU chips</li>
+                  <li>Amazon — cloud + AI infrastructure</li>
+                </ul>
+              </div>
+            </div>
+            <div class="question-box"><strong>Think:</strong> Is AI innovation today limited more by ideas — or by access to computing power?</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-safety-acceleration">
+          <div class="slide-inner fade-slide">
+            <span class="label">Big Debate</span>
+            <h2>AI Safety vs AI Acceleration</h2>
+            <div class="grid-2">
+              <div class="card-box warning">
+                <h3>Safety-first camp</h3>
+                <ul>
+                  <li>Move carefully with powerful AI systems</li>
+                  <li>Focus on alignment, interpretability and control</li>
+                  <li>Worry about misuse, bias, systemic harm and loss of oversight</li>
+                  <li>Often associated with stronger governance and staged deployment</li>
+                </ul>
+              </div>
+              <div class="card-box success">
+                <h3>Acceleration camp</h3>
+                <ul>
+                  <li>Move fast to build capability and scale</li>
+                  <li>Emphasise innovation, competition and rapid product rollout</li>
+                  <li>Argue that progress itself creates learning and economic value</li>
+                  <li>Worry that slowing down may let rivals dominate</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card-box mt-3">
+              <h3>Why this split matters</h3>
+              <p>Many major AI disagreements can be understood through this tension. Anthropic leaned hard into safety language. OpenAI has often tried to balance safety with fast commercial deployment. Musk has criticised what he sees as closed or captured AI systems while also racing to build a powerful competitor.</p>
+            </div>
+            <div class="question-box"><strong>Think:</strong> If AI is too powerful to release casually, who should decide the pace of development?</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-agi">
+          <div class="slide-inner fade-slide">
+            <span class="label">Future Concept</span>
+            <h2>What Is Artificial General Intelligence (AGI)?</h2>
+            <div class="grid-3">
+              <div class="card-box info">
+                <h3>Current AI</h3>
+                <p>Specialised systems trained for specific tasks such as writing text, recognising images, or forecasting demand.</p>
+              </div>
+              <div class="card-box success">
+                <h3>AGI vision</h3>
+                <p>A future AI that can perform most intellectual tasks that humans can perform across many domains.</p>
+              </div>
+              <div class="card-box warning">
+                <h3>Debate</h3>
+                <p>Experts disagree on when or whether AGI will be achieved — and how society should prepare.</p>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Better explanation:</strong> AGI is not about starting with no knowledge. It is about being able to continually learn new knowledge and apply it flexibly across many different situations.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-bis-implications">
+          <div class="slide-inner fade-slide">
+            <span class="label">Business Information Systems</span>
+            <h2>What This Means for Business Information Systems</h2>
+            <div class="grid-3">
+              <div class="card-box info">
+                <h3>ERP Systems</h3>
+                <p>AI can support demand forecasting, procurement planning, anomaly detection and operational summarisation inside enterprise systems.</p>
+              </div>
+              <div class="card-box success">
+                <h3>CRM Systems</h3>
+                <p>AI can personalise communications, score leads, predict churn, summarise customer interactions and support service agents.</p>
+              </div>
+              <div class="card-box warning">
+                <h3>Finance Systems</h3>
+                <p>AI can help with fraud detection, exception reporting, document review, forecasting and audit support.</p>
+              </div>
+              <div class="card-box">
+                <h3>HR Systems</h3>
+                <p>AI can help with skills matching, workforce planning, employee helpdesks and training recommendations.</p>
+              </div>
+              <div class="card-box">
+                <h3>Decision Support</h3>
+                <p>Executives increasingly expect AI-generated summaries, scenario comparisons and dashboard insights on top of ordinary reporting systems.</p>
+              </div>
+              <div class="card-box danger">
+                <h3>Governance Layer</h3>
+                <p>The more AI enters business systems, the more firms need policy, accountability, audit trails, data quality controls and human review.</p>
+              </div>
+            </div>
+            <div class="card-box soft mt-3"><strong>Teaching takeaway:</strong> Frontier AI rivalries may seem dramatic, but their real business impact shows up when these tools are embedded into everyday information systems.</div>
+          </div>
+        </section>
+
+        <section class="slide" id="slide-lecture-reflection">
+          <div class="slide-inner fade-slide">
+            <span class="label">Reflection</span>
+            <h2>What Does the AI Race Mean for Your Career?</h2>
+            <div class="grid-2">
+              <div class="card-box">
+                <h3>Likely realities</h3>
+                <ul>
+                  <li>AI tools will become standard in business systems</li>
+                  <li>Jobs will change rather than disappear completely</li>
+                  <li>Firms will increasingly rely on data-driven decisions</li>
+                  <li>Technology strategy will shape competitive advantage</li>
+                </ul>
+              </div>
+              <div class="card-box soft">
+                <h3>Skills students should build</h3>
+                <ul>
+                  <li>Critical thinking about AI outputs</li>
+                  <li>Understanding information systems</li>
+                  <li>Data literacy</li>
+                  <li>Ethical judgement</li>
+                  <li>Adaptability to technological change</li>
+                </ul>
+              </div>
+            </div>
+            <div class="question-box"><strong>Final question:</strong> Will AI mainly empower future business graduates — or make competition tougher?</div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const progressBar = document.getElementById('progress-bar-scroll');
+    function updateProgressBar() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+    }
+    window.addEventListener('scroll', updateProgressBar, { passive: true });
+    window.addEventListener('load', updateProgressBar);
+    window.addEventListener('resize', updateProgressBar);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-slide').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
