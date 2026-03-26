@@ -1,0 +1,26 @@
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left:10px;
+     padding-right:10px;
+}
+@media (min-width: 600px) {
+    body{
+        margin-left:40px;
+        margin-right:40px;
+    }
+}
+h1{
+    color: #1c48a5;
+}
+
+h3{
+    color:rgb(193, 61, 0);
+}
+p{
+    max-width: 900px;
+}
+.slide_example{
+    padding:20px;
+    border: 1px solid grey;
+    max-width: 800px;
+}
